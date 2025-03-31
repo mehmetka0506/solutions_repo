@@ -129,6 +129,8 @@ plt.tight_layout()
 plt.show()
 ```
 ![image](https://github.com/user-attachments/assets/7c49c8ad-31f7-47f3-8431-5cf4a0b96882)
+![image](https://github.com/user-attachments/assets/21f9dd1c-4d9a-4452-800a-206e8719a3af)
+
  
 ---
  
