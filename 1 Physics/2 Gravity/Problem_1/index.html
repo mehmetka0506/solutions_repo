@@ -58,9 +58,9 @@
 <ul class="current">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
+<li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Escape Velocities and Cosmic Velocities</a>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../Problem_3/">Problem 3</a>
+<li class="toctree-l2"><a class="reference internal" href="../Problem_3/">Trajectories of a Freely Released Payload Near Earth</a>
 </li>
 </ul>
 </li>
@@ -171,12 +171,81 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<p>Orbital Period and Orbital Radius</p>
+<p>Motivation</p>
+<p>Kepler’s Third Law states that the square of the orbital period (<span class="arithmatex">\(T^2\)</span>) of a planet is proportional to the cube of the orbital radius (<span class="arithmatex">\(r^3\)</span>). This relationship is fundamental in celestial mechanics and plays a critical role in our understanding of gravitational forces and planetary motion.</p>
+<p>Derivation of the Relationship</p>
+<p>For a body orbiting another significantly larger body in a circular orbit, gravitational force provides the required centripetal force:</p>
+<p>Simplifying by <span class="arithmatex">\(m\)</span>:</p>
+<p>Thus, the orbital velocity <span class="arithmatex">\(v\)</span> is:</p>
+<p>The orbital period <span class="arithmatex">\(T\)</span> (one full orbit) is distance divided by velocity:</p>
+<p>Substituting the velocity expression:</p>
+<p>Simplifying further:</p>
+<p>Squaring both sides gives Kepler’s third law explicitly:</p>
+<p>This shows clearly the proportionality <span class="arithmatex">\(T^2 \propto r^3\)</span>.</p>
+<p>Implications for Astronomy</p>
+<p>This law is crucial because it allows astronomers to:</p>
+<p>Determine planetary masses: If orbital radius and period are known, the central body's mass can be calculated.</p>
+<p>Calculate distances: Observing the orbital period helps astronomers deduce distances between celestial bodies.</p>
+<p>For instance, by measuring the Moon’s orbital period around Earth and its orbital radius, Earth’s mass can be accurately determined.</p>
+<p>Real-world Examples</p>
+<p>Celestial Body</p>
+<p>Orbital Radius (m)</p>
+<p>Orbital Period (days)</p>
+<p>Moon around Earth</p>
+<p><span class="arithmatex">\(3.84 \times 10^8\)</span></p>
+<p><span class="arithmatex">\(27.3\)</span></p>
+<p>Earth around Sun</p>
+<p><span class="arithmatex">\(1.496 \times 10^{11}\)</span></p>
+<p><span class="arithmatex">\(365.25\)</span></p>
+<p>These observed values consistently validate Kepler's Third Law.</p>
+<p>Computational Model (Python Simulation)</p>
+<p>Here's a Python simulation verifying Kepler’s Third Law numerically, with graphical representations:</p>
+<p>import numpy as np
+import matplotlib.pyplot as plt
+<img alt="alt text" src="../image.png"/></p>
+<h1 id="constants">Constants</h1>
+<p>G = 6.67430e-11  # gravitational constant
+M_earth = 5.972e24  # Earth mass in kg
+r = 4.2e7  # Orbital radius in meters</p>
+<h1 id="orbital-velocity-and-period">Orbital velocity and period</h1>
+<p>v = np.sqrt(G * M_earth / r)
+T = 2 * np.pi * r / v</p>
+<h1 id="time-series-data">Time series data</h1>
+<p>time = np.linspace(0, T, 1000)
+x = r * np.cos(2 * np.pi * time / T)
+vx = -v * np.sin(2 * np.pi * time / T)</p>
+<h1 id="plotting-both-graphs-in-one-figure">Plotting both graphs in one figure</h1>
+<p>plt.figure(figsize=(14, 6))</p>
+<h1 id="time-series-position-vs-time">Time series (Position vs Time)</h1>
+<p>plt.subplot(1, 2, 1)
+plt.plot(time, x / r, color='orange')
+plt.title('Time Series (X-Position vs Time)')
+plt.xlabel('Time (s)')
+plt.ylabel('X Position (normalized)')
+plt.grid(True)</p>
+<h1 id="phase-portrait-velocity-vs-position">Phase Portrait (Velocity vs Position)</h1>
+<p>plt.subplot(1, 2, 2)
+plt.plot(x / r, vx / v, color='purple')
+plt.title('Phase Portrait (Velocity vs Position)')
+plt.xlabel('Position (normalized)')
+plt.ylabel('Velocity (normalized)')
+plt.grid(True)</p>
+<p>plt.suptitle('Orbital Motion Visualization')
+plt.tight_layout()
+plt.savefig('orbital_motion.png')
+plt.show()</p>
+<p>Run this code to generate and save the graph as orbital_motion.png. Ensure the image is located in your working directory.</p>
+<p>Extension to Elliptical Orbits</p>
+<p>Kepler's third law also applies to elliptical orbits, using the semi-major axis <span class="arithmatex">\(a\)</span> instead of radius <span class="arithmatex">\(r\)</span>:</p>
+<p>This generalized form allows for accurate predictions for real planetary systems, which typically have elliptical orbits.</p>
+<p>Conclusion</p>
+<p>Kepler’s Third Law provides astronomers with an essential tool for understanding celestial dynamics. Through both theoretical and computational analysis, we verify the profound connection between orbital radius and orbital period, critical in space exploration and astrophysics.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
 <a class="btn btn-neutral float-left" href="../../1%20Mechanics/Problem_2/" title="Problem 2"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-<a class="btn btn-neutral float-right" href="../Problem_2/" title="Problem 2">Next <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-right" href="../Problem_2/" title="Escape Velocities and Cosmic Velocities">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">

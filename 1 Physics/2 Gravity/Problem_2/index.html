@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 2 - Physics and Mathematics</title>
+<title>Escape Velocities and Cosmic Velocities - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 2";
+        var mkdocs_page_name = "Escape Velocities and Cosmic Velocities";
         var mkdocs_page_input_path = "1 Physics/2 Gravity/Problem_2.md";
         var mkdocs_page_url = null;
       </script>
@@ -56,11 +56,11 @@
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Problem_1/">Problem 1</a>
 </li>
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Escape Velocities and Cosmic Velocities</a>
 <ul class="current">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../Problem_3/">Problem 3</a>
+<li class="toctree-l2"><a class="reference internal" href="../Problem_3/">Trajectories of a Freely Released Payload Near Earth</a>
 </li>
 </ul>
 </li>
@@ -163,7 +163,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">2 Gravity</li>
-<li class="breadcrumb-item active">Problem 2</li>
+<li class="breadcrumb-item active">Escape Velocities and Cosmic Velocities</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,12 +171,86 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-2">Problem 2</h1>
+<h1 id="escape-velocities-and-cosmic-velocities">Escape Velocities and Cosmic Velocities</h1>
+<h1 id="motivation">Motivation</h1>
+<p>Escape velocity and cosmic velocities are fundamental concepts in astrophysics, vital for understanding gravitational interactions and space exploration requirements. These velocities dictate the energy thresholds necessary for objects to orbit, escape, or leave a star system entirely.</p>
+<h1 id="definitions-and-physical-meanings">Definitions and Physical Meanings</h1>
+<h1 id="1-first-cosmic-velocity-orbital-velocity">1. First Cosmic Velocity (Orbital Velocity)</h1>
+<p>The velocity required for a stable circular orbit around a celestial body:</p>
+<ol>
+<li>Second Cosmic Velocity (Escape Velocity)</li>
+</ol>
+<p>The minimum velocity required to escape the gravitational field of a celestial body without additional propulsion:</p>
+<ol>
+<li>Third Cosmic Velocity</li>
+</ol>
+<p>The velocity required to escape the gravitational influence of the solar system from Earth's orbit:</p>
+<p>where <span class="arithmatex">\(v_{orbital,sun}\)</span> is Earth's orbital velocity around the Sun (~29.8 km/s).</p>
+<h1 id="mathematical-derivations">Mathematical Derivations</h1>
+<p>Orbital Velocity (First Cosmic Velocity)</p>
+<p>A stable circular orbit requires gravitational force to equal centripetal force:</p>
+<p>Escape Velocity (Second Cosmic Velocity)</p>
+<p>Escape velocity comes from energy conservation, equating kinetic and gravitational potential energies:</p>
+<p>Solar Escape Velocity (Third Cosmic Velocity)</p>
+<p>The velocity needed to overcome both Earth's and the Sun’s gravitational pull:</p>
+<p>Calculations for Celestial Bodies</p>
+<p>Celestial Body</p>
+<p>Radius (m)</p>
+<p>Mass (kg)</p>
+<p>Earth</p>
+<p><span class="arithmatex">\(6.371 \times 10^6\)</span></p>
+<p><span class="arithmatex">\(5.972 \times 10^{24}\)</span></p>
+<p>Mars</p>
+<p><span class="arithmatex">\(3.3895 \times 10^6\)</span></p>
+<p><span class="arithmatex">\(6.417 \times 10^{23}\)</span></p>
+<p>Jupiter</p>
+<p><span class="arithmatex">\(6.9911 \times 10^7\)</span></p>
+<p><span class="arithmatex">\(1.898 \times 10^{27}\)</span></p>
+<p>Python Simulation and Visualization</p>
+<p>import numpy as np
+import matplotlib.pyplot as plt
+<img alt="alt text" src="../image-1.png"/></p>
+<h1 id="constants">Constants</h1>
+<p>G = 6.67430e-11
+bodies = {
+    'Earth': {'mass': 5.972e24, 'radius': 6.371e6},
+    'Mars': {'mass': 6.417e23, 'radius': 3.3895e6},
+    'Jupiter': {'mass': 1.898e27, 'radius': 6.9911e7}
+}</p>
+<p>names, orbital_velocities, escape_velocities = [], [], []</p>
+<p>for name, props in bodies.items():
+    M, R = props['mass'], props['radius']
+    v_orbital = np.sqrt(G * M / R)
+    v_escape = np.sqrt(2 * G * M / R)</p>
+<pre><code>names.append(name)
+orbital_velocities.append(v_orbital / 1000)
+escape_velocities.append(v_escape / 1000)
+</code></pre>
+<h1 id="plot">Plot</h1>
+<p>x = np.arange(len(names))
+width = 0.35</p>
+<p>fig, ax = plt.subplots(figsize=(10, 6))
+ax.bar(x - width/2, orbital_velocities, width, label='Orbital Velocity (km/s)', color='skyblue')
+ax.bar(x + width/2, escape_velocities, width, label='Escape Velocity (km/s)', color='salmon')</p>
+<p>ax.set_ylabel('Velocity (km/s)')
+ax.set_title('Orbital and Escape Velocities for Different Celestial Bodies')
+ax.set_xticks(x)
+ax.set_xticklabels(names)
+ax.legend()</p>
+<p>plt.grid(True)
+plt.tight_layout()
+plt.show()</p>
+<p>Importance in Space Exploration</p>
+<p>Launching Satellites: Orbital velocity determines the minimal speed satellites must achieve to maintain a stable orbit.</p>
+<p>Interplanetary Missions: Escape velocity guides spacecraft design, ensuring vehicles can exit Earth's gravitational field and travel to Mars, Jupiter, or beyond.</p>
+<p>Interstellar Travel: Understanding the third cosmic velocity is essential for missions intended to leave the solar system, such as Voyager 1 and 2.</p>
+<p>Conclusion</p>
+<p>Cosmic velocities significantly shape our approach to space exploration. Accurate knowledge and computational analysis of these velocities allow precise mission planning, facilitating humanity's exploration and potential colonization of other worlds.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
 <a class="btn btn-neutral float-left" href="../Problem_1/" title="Problem 1"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-<a class="btn btn-neutral float-right" href="../Problem_3/" title="Problem 3">Next <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-right" href="../Problem_3/" title="Trajectories of a Freely Released Payload Near Earth">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">

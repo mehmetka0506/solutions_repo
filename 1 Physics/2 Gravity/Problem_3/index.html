@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 3 - Physics and Mathematics</title>
+<title>Trajectories of a Freely Released Payload Near Earth - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 3";
+        var mkdocs_page_name = "Trajectories of a Freely Released Payload Near Earth";
         var mkdocs_page_input_path = "1 Physics/2 Gravity/Problem_3.md";
         var mkdocs_page_url = null;
       </script>
@@ -56,9 +56,9 @@
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Problem_1/">Problem 1</a>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
+<li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Escape Velocities and Cosmic Velocities</a>
 </li>
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 3</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Trajectories of a Freely Released Payload Near Earth</a>
 <ul class="current">
 </ul>
 </li>
@@ -163,7 +163,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">2 Gravity</li>
-<li class="breadcrumb-item active">Problem 3</li>
+<li class="breadcrumb-item active">Trajectories of a Freely Released Payload Near Earth</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,12 +171,78 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-3">Problem 3</h1>
-<p>.</p>
+<h1 id="trajectories-of-a-freely-released-payload-near-earth">Trajectories of a Freely Released Payload Near Earth</h1>
+<h1 id="motivation">Motivation</h1>
+<p>The trajectory of an object released from a rocket near Earth depends significantly on initial conditions such as position, altitude, and velocity. This problem integrates orbital mechanics and numerical analysis, essential for real-world applications in satellite deployment, orbital insertion, reentry strategies, and space exploration.</p>
+<h1 id="types-of-trajectories">Types of Trajectories</h1>
+<p>When a payload is released near Earth, its trajectory may take one of three forms:</p>
+<p>Elliptical Trajectory: Bound orbit around Earth.</p>
+<p>Parabolic Trajectory: Exactly at escape velocity, theoretically escaping Earth’s gravitational influence.</p>
+<p>Hyperbolic Trajectory: Exceeding escape velocity, permanently escaping Earth’s gravitational pull.</p>
+<p>The type of trajectory depends primarily on the initial velocity relative to Earth's gravitational pull.</p>
+<p>Mathematical Analysis</p>
+<p>Using Newton’s Law of Universal Gravitation:</p>
+<p>Where:</p>
+<p><span class="arithmatex">\(G\)</span> is gravitational constant</p>
+<p><span class="arithmatex">\(M\)</span> is mass of Earth</p>
+<p><span class="arithmatex">\(m\)</span> is payload mass (cancels out in trajectory calculations)</p>
+<p><span class="arithmatex">\(r\)</span> is distance from Earth’s center</p>
+<p>Energy Considerations:</p>
+<p>Total mechanical energy determines the trajectory type:</p>
+<p>Elliptical: <span class="arithmatex">\(E &lt; 0\)</span></p>
+<p>Parabolic: <span class="arithmatex">\(E = 0\)</span></p>
+<p>Hyperbolic: <span class="arithmatex">\(E &gt; 0\)</span></p>
+<p>Numerical Simulation (Python)</p>
+<p>Below is a Python script to numerically simulate and visualize payload trajectories:</p>
+<p>import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp</p>
+<h1 id="constants">Constants</h1>
+<p>G = 6.67430e-11
+M = 5.972e24
+R_earth = 6.371e6</p>
+<h1 id="equations-of-motion">Equations of motion</h1>
+<p>def equations(t, y):
+    r = np.sqrt(y[0]<strong>2 + y[1]</strong>2)
+    ax = -G * M * y[0] / r<strong>3
+    ay = -G * M * y[1] / r</strong>3
+    return [y[2], y[3], ax, ay]</p>
+<h1 id="initial-conditions-altitude-400km-and-varying-velocities">Initial conditions: altitude (400km) and varying velocities</h1>
+<p>altitude = 400e3
+v_initial = np.sqrt(G*M/(R_earth+altitude))  # Circular orbital speed</p>
+<h1 id="initial-conditions-for-elliptical-parabolic-hyperbolic-trajectories">Initial conditions for elliptical, parabolic, hyperbolic trajectories</h1>
+<p>initial_conditions = [
+    (0, R_earth + altitude, 0.8 * v_initial, 0),  # Elliptical
+    (0, R_earth + altitude, v_initial<em>np.sqrt(2), 0),  # Parabolic
+    (0, R_earth + altitude, 1.2 * v_initial</em>np.sqrt(2), 0)  # Hyperbolic
+]</p>
+<p>labels = ['Elliptical', 'Parabolic', 'Hyperbolic']</p>
+<p>plt.figure(figsize=(10,10))</p>
+<p>for y0, label in zip(initial_conditions, labels):
+    sol = solve_ivp(equations, [0, 8000], y0, max_step=10)
+    plt.plot(sol.y[0]/1e6, sol.y[1]/1e6, label=label)
+<img alt="alt text" src="../image-2.png"/></p>
+<h1 id="earth-for-visualization">Earth for visualization</h1>
+<p>earth = plt.Circle((0, 0), R_earth/1e6, color='blue', alpha=0.3)
+plt.gca().add_artist(earth)</p>
+<p>plt.xlabel('X Position (1000 km)')
+plt.ylabel('Y Position (1000 km)')
+plt.title('Payload Trajectories Near Earth')
+plt.legend()
+plt.axis('equal')
+plt.grid(True)
+plt.show()</p>
+<h1 id="real-world-applications">Real-world Applications</h1>
+<p>Orbital insertion: Payload velocity adjusted precisely for stable elliptical orbits.</p>
+<p>Satellite deployment: Payloads released at calculated velocities to achieve desired trajectories.</p>
+<p>Reentry: Adjusting velocities for payloads to safely reenter Earth’s atmosphere.</p>
+<p>Interplanetary exploration: Hyperbolic trajectories employed to leave Earth's gravitational influence for missions to other planets.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>Understanding and accurately calculating payload trajectories near Earth are vital in space missions. Numerical methods and simulations are essential tools for predicting and visualizing these trajectories, supporting successful mission outcomes.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
-<a class="btn btn-neutral float-left" href="../Problem_2/" title="Problem 2"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-left" href="../Problem_2/" title="Escape Velocities and Cosmic Velocities"><span class="icon icon-circle-arrow-left"></span> Previous</a>
 <a class="btn btn-neutral float-right" href="../../3%20Waves/Problem_1/" title="Problem 1">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
