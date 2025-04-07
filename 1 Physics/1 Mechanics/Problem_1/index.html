@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>Investigating the Range as a Function of the Angle of Projection - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "Investigating the Range as a Function of the Angle of Projection";
         var mkdocs_page_input_path = "1 Physics/1 Mechanics/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -46,7 +46,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal current">1 Mechanics</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Investigating the Range as a Function of the Angle of Projection</a>
 <ul class="current">
 </ul>
 </li>
@@ -56,7 +56,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal">2 Gravity</a>
 <ul>
-<li class="toctree-l2"><a class="reference internal" href="../../2%20Gravity/Problem_1/">Problem 1</a>
+<li class="toctree-l2"><a class="reference internal" href="../../2%20Gravity/Problem_1/">Orbital Period and Orbital Radius</a>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../2%20Gravity/Problem_2/">Escape Velocities and Cosmic Velocities</a>
 </li>
@@ -163,7 +163,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">1 Mechanics</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">Investigating the Range as a Function of the Angle of Projection</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,144 +171,74 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
-<h1 id="investigating-the-dynamics-of-a-forced-damped-pendulum">Investigating the Dynamics of a Forced Damped Pendulum</h1>
-<hr/>
-<h2 id="1-theoretical-background">1.  Theoretical Background</h2>
-<p>A forced damped pendulum illustrates the dynamics of nonlinear oscillators. It models real systems where restoring forces, resistance (damping), and external periodic forces interact.</p>
-<h3 id="governing-equation">Governing Equation</h3>
-<p>The general motion is described by:</p>
-<div class="arithmatex">\[
-\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
-\]</div>
-<p>Where:<br/>
-- <span class="arithmatex">\(\theta\)</span>: angular position<br/>
-- <span class="arithmatex">\(b\)</span>: damping constant<br/>
-- <span class="arithmatex">\(g\)</span>: gravitational acceleration<br/>
-- <span class="arithmatex">\(L\)</span>: pendulum length<br/>
-- <span class="arithmatex">\(A\)</span>: driving force amplitude<br/>
-- <span class="arithmatex">\(\omega\)</span>: driving force frequency  </p>
-<hr/>
-<h3 id="full-derivation-of-the-equation">Full Derivation of the Equation</h3>
-<p>From Newton's second law for rotation:</p>
-<div class="arithmatex">\[
-\sum \tau = I \cdot \alpha
-\]</div>
-<ul>
-<li><span class="arithmatex">\(I = mL^2\)</span> is the moment of inertia of the pendulum</li>
-<li><span class="arithmatex">\(\alpha = \frac{d^2\theta}{dt^2}\)</span> is the angular acceleration</li>
-</ul>
-<p>The torques are:
-- Gravitational torque: <span class="arithmatex">\(-mgL \sin(\theta)\)</span><br/>
-- Damping torque: <span class="arithmatex">\(-b \frac{d\theta}{dt}\)</span><br/>
-- Driving torque: <span class="arithmatex">\(A \cos(\omega t)\)</span></p>
-<p>Total torque:</p>
-<div class="arithmatex">\[
-mL^2 \cdot \frac{d^2\theta}{dt^2} = -mgL \sin(\theta) - b \frac{d\theta}{dt} + A \cos(\omega t)
-\]</div>
-<p>Divide through by <span class="arithmatex">\(mL^2\)</span>:</p>
-<div class="arithmatex">\[
-\frac{d^2\theta}{dt^2} + \frac{b}{mL^2} \frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = \frac{A}{mL^2} \cos(\omega t)
-\]</div>
-<p>Let <span class="arithmatex">\(b' = \frac{b}{mL^2}\)</span> and <span class="arithmatex">\(A' = \frac{A}{mL^2}\)</span>:</p>
-<div class="arithmatex">\[
-\frac{d^2\theta}{dt^2} + b' \frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A' \cos(\omega t)
-\]</div>
-<p>Or written in simplified form:</p>
-<div class="arithmatex">\[
-\frac{d^2\theta}{dt^2} + b \frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
-\]</div>
-<hr/>
-<h3 id="linearized-approximation">Linearized Approximation</h3>
-<p>Using the small-angle assumption (<span class="arithmatex">\(\theta \approx 0\)</span>), the equation becomes:</p>
-<div class="arithmatex">\[
-\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \theta = A \cos(\omega t)
-\]</div>
-<p>This approximation simplifies the problem to a linear, second-order non-homogeneous ODE, ideal for numerical simulation.</p>
-<hr/>
-<h2 id="2-simulation-in-python">2.  Simulation in Python</h2>
-<p>We simulate three different pendulum conditions:</p>
-<ul>
-<li>A <strong>frictionless simple pendulum</strong></li>
-<li>A <strong>damped pendulum</strong></li>
-<li>A <strong>driven pendulum with no damping</strong></li>
-</ul>
-<h3 id="python-code">Python Code</h3>
-<pre><code class="language-python">import numpy as np
-import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp
-
-def pendulum_dynamics(t, y, b, g, L, A, omega):
-    theta, omega_ = y
-    dtheta_dt = omega_
-    domega_dt = -b * omega_ - (g / L) * np.sin(theta) + A * np.cos(omega * t)
-    return [dtheta_dt, domega_dt]
-
-# Time setup
-t_range = (0, 50)
-t_points = np.linspace(*t_range, 1000)
-initial_state = [0.2, 0.0]
-
-# Pendulum setups
-scenarios = [
-    {"label": "1) Undamped", "b": 0.0, "A": 0.0, "color": "salmon"},
-    {"label": "2) Damped", "b": 0.4, "A": 0.0, "color": "slateblue"},
-    {"label": "3) Driven", "b": 0.0, "A": 1.0, "color": "mediumseagreen"},
-]
-
-# Constants
-g = 9.8
-L = 1.0
-omega_drive = 2.0
-
-# Plotting results
-fig, axes = plt.subplots(len(scenarios), 2, figsize=(12, 10))
-
-for i, scenario in enumerate(scenarios):
-    sol = solve_ivp(
-        pendulum_dynamics,
-        t_range,
-        initial_state,
-        args=(scenario["b"], g, L, scenario["A"], omega_drive),
-        t_eval=t_points
-    )
-    theta, omega_ = sol.y
-    axes[i, 0].plot(sol.t, theta, color=scenario["color"])
-    axes[i, 0].set_title(f'{scenario["label"]} - Time Evolution')
-    axes[i, 0].set_xlabel("Time (s)")
-    axes[i, 0].set_ylabel("Angle θ (rad)")
-    axes[i, 0].grid(True)
-
-    axes[i, 1].plot(theta, omega_, color=scenario["color"])
-    axes[i, 1].set_title(f'{scenario["label"]} - Phase Space')
-    axes[i, 1].set_xlabel("θ (rad)")
-    axes[i, 1].set_ylabel("ω (rad/s)")
-    axes[i, 1].grid(True)
-
+<h1 id="investigating-the-range-as-a-function-of-the-angle-of-projection">Investigating the Range as a Function of the Angle of Projection</h1>
+<h1 id="motivation">Motivation</h1>
+<p>Projectile motion, though often introduced early in physics education, reveals a rich and complex structure when explored deeply. Understanding how the range of a projectile depends on its angle of projection opens a gateway to mastering core physics principles—especially kinematics and dynamics.</p>
+<p>The horizontal range is not only influenced by the angle but also by several key parameters such as initial velocity, gravitational acceleration, and launch height. These parameters provide flexibility for the model to apply in diverse real-world scenarios, ranging from sports trajectories to orbital launches.</p>
+<h1 id="1-theoretical-foundation">1. Theoretical Foundation</h1>
+<h2 id="governing-equations">Governing Equations</h2>
+<p>We begin with the basic kinematic equations for projectile motion. Assuming no air resistance and a flat launch/landing surface:</p>
+<p>Let:</p>
+<p>: initial velocity</p>
+<p>: angle of projection</p>
+<p>: gravitational acceleration</p>
+<p>The horizontal and vertical components of the initial velocity are:</p>
+<p>The time of flight is:</p>
+<p>The horizontal range  becomes:</p>
+<p>Observations:</p>
+<p>Range is maximized when </p>
+<p>For a fixed  and , different angles yield different ranges</p>
+<p>The symmetry: </p>
+<h1 id="2-analysis-of-the-range">2. Analysis of the Range</h1>
+<p>Using the range formula:</p>
+<p>This function peaks at  and exhibits a parabolic relationship.</p>
+<p>Influence of Other Parameters</p>
+<p>Initial Velocity: Range increases quadratically with </p>
+<p>Gravity: Inverse relationship — greater  reduces the range</p>
+<p>Launch Height: Introduces an asymmetry and increases max range, but breaks analytical simplicity</p>
+<h1 id="3-practical-applications">3. Practical Applications</h1>
+<p>The basic model assumes flat terrain and no air resistance. However, real-world adaptations include:</p>
+<p>Launching projectiles from elevated platforms</p>
+<p>Factoring in wind resistance or drag forces ()</p>
+<p>Non-uniform gravitational fields (e.g., planetary launches)</p>
+<p>Such complexities are addressed through numerical simulation methods or empirical correction models.</p>
+<h1 id="4-implementation-python-simulation">4. Implementation (Python Simulation)</h1>
+<p>Below is a Python script that simulates and plots the range as a function of angle for various initial velocities.</p>
+<p>import numpy as np
+import matplotlib.pyplot as plt</p>
+<p>def projectile_range(v0, g=9.81):
+    angles_deg = np.linspace(0, 90, 500)
+    angles_rad = np.radians(angles_deg)
+    ranges = (v0**2) * np.sin(2 * angles_rad) / g
+    return angles_deg, ranges</p>
+<h1 id="simulation-for-different-velocities">Simulation for different velocities</h1>
+<p>velocities = [10, 20, 30]
+plt.figure(figsize=(10, 6))</p>
+<p>for v0 in velocities:
+    angles, ranges = projectile_range(v0)
+    plt.plot(angles, ranges, label=f'v0 = {v0} m/s')</p>
+<p>plt.title("Range vs. Projection Angle")
+plt.xlabel("Angle (degrees)")
+plt.ylabel("Range (meters)")
+plt.grid(True)
+plt.legend()
 plt.tight_layout()
-plt.show()
-</code></pre>
-<p><img alt="alt text" src="../image.png"/></p>
-<hr/>
-<h2 id="3-observations">3. Observations</h2>
-<p><strong>Undamped Case</strong><br/>
-- Angle oscillates periodically<br/>
-- Phase space shows perfect ellipses</p>
-<p><strong>Damped Case</strong><br/>
-- Amplitude decays with time<br/>
-- Spiral phase plot confirms energy dissipation</p>
-<p><strong>Driven Case</strong><br/>
-- Angle shows sustained oscillations<br/>
-- Phase diagram reveals complex periodic loops</p>
-<hr/>
-<h2 id="4-summary">4. Summary</h2>
-<p>This pendulum model shows how damping and external forces affect nonlinear oscillators. It lays the foundation for exploring chaos and resonance in later studies.</p>
-<p>Possible extensions:</p>
-<ul>
-<li>Simulate chaotic regimes with stronger forcing  </li>
-<li>Visualize energy over time  </li>
-<li>Explore resonance phenomena and amplitude–frequency relationships</li>
-</ul>
+plt.show()</p>
+<h1 id="5-graphical-interpretation">5. Graphical Interpretation</h1>
+<p>The graph shows a clear peak at  for each velocity.</p>
+<p>Higher initial velocities stretch the curve upward proportionally.</p>
+<p>The symmetry confirms the theoretical relation </p>
+<h1 id="6-limitations-extensions">6. Limitations &amp; Extensions</h1>
+<h2 id="limitations">Limitations:</h2>
+<p>Ignores air resistance, which becomes significant at higher velocities</p>
+<p>Assumes flat terrain and level launch/landing height</p>
+<h2 id="suggested-extensions">Suggested Extensions:</h2>
+<p>Implement drag force (e.g., Euler’s method for )</p>
+<p>Incorporate different terrains and elevation changes</p>
+<p>Add wind components to assess horizontal deflection</p>
+<h1 id="summary">Summary</h1>
+<p>Projectile motion, especially range analysis, offers a clear and accessible way to apply physics and computational tools. Starting from a simple closed-form solution, we extend understanding using numerical simulations and graphical interpretations.</p>
+<p>This problem links core physics, programming, and real-world phenomena in a way that highlights both the power and limitations of idealized models.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
