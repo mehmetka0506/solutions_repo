@@ -122,6 +122,6 @@ Interplanetary Missions: Escape velocity guides spacecraft design, ensuring vehi
 
 Interstellar Travel: Understanding the third cosmic velocity is essential for missions intended to leave the solar system, such as Voyager 1 and 2.
 
-Conclusion
+# Conclusion
 
 Cosmic velocities significantly shape our approach to space exploration. Accurate knowledge and computational analysis of these velocities allow precise mission planning, facilitating humanity's exploration and potential colonization of other worlds.

@@ -1,176 +1,129 @@
-# Problem 1
-# Investigating the Dynamics of a Forced Damped Pendulum
- 
----
- 
-## 1.  Theoretical Background
- 
-A forced damped pendulum illustrates the dynamics of nonlinear oscillators. It models real systems where restoring forces, resistance (damping), and external periodic forces interact.
- 
-### Governing Equation
- 
-The general motion is described by:
- 
-$$
-\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
-$$
- 
-Where:  
-- $\theta$: angular position  
-- $b$: damping constant  
-- $g$: gravitational acceleration  
-- $L$: pendulum length  
-- $A$: driving force amplitude  
-- $\omega$: driving force frequency  
- 
----
- 
-### Full Derivation of the Equation
- 
-From Newton's second law for rotation:
- 
-$$
-\sum \tau = I \cdot \alpha
-$$
- 
-- $I = mL^2$ is the moment of inertia of the pendulum
-- $\alpha = \frac{d^2\theta}{dt^2}$ is the angular acceleration
- 
-The torques are:
-- Gravitational torque: $-mgL \sin(\theta)$  
-- Damping torque: $-b \frac{d\theta}{dt}$  
-- Driving torque: $A \cos(\omega t)$
- 
-Total torque:
- 
-$$
-mL^2 \cdot \frac{d^2\theta}{dt^2} = -mgL \sin(\theta) - b \frac{d\theta}{dt} + A \cos(\omega t)
-$$
- 
-Divide through by $mL^2$:
- 
-$$
-\frac{d^2\theta}{dt^2} + \frac{b}{mL^2} \frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = \frac{A}{mL^2} \cos(\omega t)
-$$
- 
-Let $b' = \frac{b}{mL^2}$ and $A' = \frac{A}{mL^2}$:
- 
-$$
-\frac{d^2\theta}{dt^2} + b' \frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A' \cos(\omega t)
-$$
- 
-Or written in simplified form:
- 
-$$
-\frac{d^2\theta}{dt^2} + b \frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
-$$
- 
----
- 
-### Linearized Approximation
- 
-Using the small-angle assumption ($\theta \approx 0$), the equation becomes:
- 
-$$
-\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \theta = A \cos(\omega t)
-$$
- 
-This approximation simplifies the problem to a linear, second-order non-homogeneous ODE, ideal for numerical simulation.
- 
----
- 
-## 2.  Simulation in Python
- 
-We simulate three different pendulum conditions:
- 
-- A **frictionless simple pendulum**
-- A **damped pendulum**
-- A **driven pendulum with no damping**
- 
-### Python Code
- 
-```python
+# Investigating the Range as a Function of the Angle of Projection
+
+# Motivation
+
+Projectile motion, though often introduced early in physics education, reveals a rich and complex structure when explored deeply. Understanding how the range of a projectile depends on its angle of projection opens a gateway to mastering core physics principles—especially kinematics and dynamics.
+
+The horizontal range is not only influenced by the angle but also by several key parameters such as initial velocity, gravitational acceleration, and launch height. These parameters provide flexibility for the model to apply in diverse real-world scenarios, ranging from sports trajectories to orbital launches.
+
+# 1. Theoretical Foundation
+
+## Governing Equations
+
+We begin with the basic kinematic equations for projectile motion. Assuming no air resistance and a flat launch/landing surface:
+
+Let:
+
+: initial velocity
+
+: angle of projection
+
+: gravitational acceleration
+
+The horizontal and vertical components of the initial velocity are:
+
+
+
+The time of flight is:
+
+
+
+The horizontal range  becomes:
+
+
+
+Observations:
+
+Range is maximized when 
+
+For a fixed  and , different angles yield different ranges
+
+The symmetry: 
+
+# 2. Analysis of the Range
+
+Using the range formula:
+
+
+
+This function peaks at  and exhibits a parabolic relationship.
+
+Influence of Other Parameters
+
+Initial Velocity: Range increases quadratically with 
+
+Gravity: Inverse relationship — greater  reduces the range
+
+Launch Height: Introduces an asymmetry and increases max range, but breaks analytical simplicity
+
+# 3. Practical Applications
+
+The basic model assumes flat terrain and no air resistance. However, real-world adaptations include:
+
+Launching projectiles from elevated platforms
+
+Factoring in wind resistance or drag forces ()
+
+Non-uniform gravitational fields (e.g., planetary launches)
+
+Such complexities are addressed through numerical simulation methods or empirical correction models.
+
+# 4. Implementation (Python Simulation)
+
+Below is a Python script that simulates and plots the range as a function of angle for various initial velocities.
+
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp
- 
-def pendulum_dynamics(t, y, b, g, L, A, omega):
-    theta, omega_ = y
-    dtheta_dt = omega_
-    domega_dt = -b * omega_ - (g / L) * np.sin(theta) + A * np.cos(omega * t)
-    return [dtheta_dt, domega_dt]
- 
-# Time setup
-t_range = (0, 50)
-t_points = np.linspace(*t_range, 1000)
-initial_state = [0.2, 0.0]
- 
-# Pendulum setups
-scenarios = [
-    {"label": "1) Undamped", "b": 0.0, "A": 0.0, "color": "salmon"},
-    {"label": "2) Damped", "b": 0.4, "A": 0.0, "color": "slateblue"},
-    {"label": "3) Driven", "b": 0.0, "A": 1.0, "color": "mediumseagreen"},
-]
- 
-# Constants
-g = 9.8
-L = 1.0
-omega_drive = 2.0
- 
-# Plotting results
-fig, axes = plt.subplots(len(scenarios), 2, figsize=(12, 10))
- 
-for i, scenario in enumerate(scenarios):
-    sol = solve_ivp(
-        pendulum_dynamics,
-        t_range,
-        initial_state,
-        args=(scenario["b"], g, L, scenario["A"], omega_drive),
-        t_eval=t_points
-    )
-    theta, omega_ = sol.y
-    axes[i, 0].plot(sol.t, theta, color=scenario["color"])
-    axes[i, 0].set_title(f'{scenario["label"]} - Time Evolution')
-    axes[i, 0].set_xlabel("Time (s)")
-    axes[i, 0].set_ylabel("Angle θ (rad)")
-    axes[i, 0].grid(True)
- 
-    axes[i, 1].plot(theta, omega_, color=scenario["color"])
-    axes[i, 1].set_title(f'{scenario["label"]} - Phase Space')
-    axes[i, 1].set_xlabel("θ (rad)")
-    axes[i, 1].set_ylabel("ω (rad/s)")
-    axes[i, 1].grid(True)
- 
+
+def projectile_range(v0, g=9.81):
+    angles_deg = np.linspace(0, 90, 500)
+    angles_rad = np.radians(angles_deg)
+    ranges = (v0**2) * np.sin(2 * angles_rad) / g
+    return angles_deg, ranges
+
+# Simulation for different velocities
+velocities = [10, 20, 30]
+plt.figure(figsize=(10, 6))
+
+for v0 in velocities:
+    angles, ranges = projectile_range(v0)
+    plt.plot(angles, ranges, label=f'v0 = {v0} m/s')
+
+plt.title("Range vs. Projection Angle")
+plt.xlabel("Angle (degrees)")
+plt.ylabel("Range (meters)")
+plt.grid(True)
+plt.legend()
 plt.tight_layout()
 plt.show()
-```
- ![alt text](image.png)
- 
----
- 
-## 3. Observations
- 
-**Undamped Case**  
-- Angle oscillates periodically  
-- Phase space shows perfect ellipses
- 
-**Damped Case**  
-- Amplitude decays with time  
-- Spiral phase plot confirms energy dissipation
- 
-**Driven Case**  
-- Angle shows sustained oscillations  
-- Phase diagram reveals complex periodic loops
- 
----
- 
-## 4. Summary
- 
-This pendulum model shows how damping and external forces affect nonlinear oscillators. It lays the foundation for exploring chaos and resonance in later studies.
- 
-Possible extensions:
- 
-- Simulate chaotic regimes with stronger forcing  
-- Visualize energy over time  
-- Explore resonance phenomena and amplitude–frequency relationships
+
+# 5. Graphical Interpretation
+
+The graph shows a clear peak at  for each velocity.
+
+Higher initial velocities stretch the curve upward proportionally.
+
+The symmetry confirms the theoretical relation 
+
+# 6. Limitations & Extensions
+
+## Limitations:
+
+Ignores air resistance, which becomes significant at higher velocities
+
+Assumes flat terrain and level launch/landing height
+
+## Suggested Extensions:
+
+Implement drag force (e.g., Euler’s method for )
+
+Incorporate different terrains and elevation changes
+
+Add wind components to assess horizontal deflection
+
+# Summary
+
+Projectile motion, especially range analysis, offers a clear and accessible way to apply physics and computational tools. Starting from a simple closed-form solution, we extend understanding using numerical simulations and graphical interpretations.
+
+This problem links core physics, programming, and real-world phenomena in a way that highlights both the power and limitations of idealized models.
 

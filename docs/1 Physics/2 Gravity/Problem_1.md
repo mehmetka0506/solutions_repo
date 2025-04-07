@@ -1,6 +1,6 @@
-Orbital Period and Orbital Radius
+# Orbital Period and Orbital Radius
 
-Motivation
+# Motivation
 
 Kepler’s Third Law states that the square of the orbital period ($T^2$) of a planet is proportional to the cube of the orbital radius ($r^3$). This relationship is fundamental in celestial mechanics and plays a critical role in our understanding of gravitational forces and planetary motion.
 
@@ -123,6 +123,6 @@ Kepler's third law also applies to elliptical orbits, using the semi-major axis 
 
 This generalized form allows for accurate predictions for real planetary systems, which typically have elliptical orbits.
 
-Conclusion
+# Conclusion
 
 Kepler’s Third Law provides astronomers with an essential tool for understanding celestial dynamics. Through both theoretical and computational analysis, we verify the profound connection between orbital radius and orbital period, critical in space exploration and astrophysics.
