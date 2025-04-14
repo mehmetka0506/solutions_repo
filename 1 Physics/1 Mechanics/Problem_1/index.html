@@ -222,19 +222,19 @@ plt.figure(figsize=(10, 6))</p>
     plt.plot(angles, ranges, label=f'<span class="arithmatex">\(v_0 = {v0}\)</span> m/s')
 import numpy as np
 import matplotlib.pyplot as plt</p>
-<h1 id="fonksiyon-belirli-bir-ilk-hzla-acya-gore-menzili-hesaplar">Fonksiyon: belirli bir ilk hızla açıya göre menzili hesaplar</h1>
+<h1 id="function-for-first-speeds">Function for first speeds</h1>
 <p>def projectile_range(v0, g=9.81):
     angles_deg = np.linspace(0, 90, 500)  # Açıları 0–90 derece arasında al
     angles_rad = np.radians(angles_deg)  # Radyana çevir
     ranges = (v0**2) * np.sin(2 * angles_rad) / g  # Menzil formülü
     return angles_deg, ranges</p>
-<h1 id="farkl-ilk-hzlar-icin-simulasyon">Farklı ilk hızlar için simülasyon</h1>
+<h1 id="simulations-for-diffrent-speeds">Simulations for diffrent speeds</h1>
 <p>velocities = [10, 20, 30]  # m/s
 plt.figure(figsize=(10, 6))</p>
 <p>for v0 in velocities:
     angles, ranges = projectile_range(v0)
     plt.plot(angles, ranges, label=f'<span class="arithmatex">\(v_0 = {v0}\)</span> m/s')</p>
-<h1 id="grafik-ayarlar">Grafik ayarları</h1>
+<h1 id="pytonplot">Pyton/plot</h1>
 <p>plt.title("Range vs. Projection Angle")
 plt.xlabel("Angle (degrees)")
 plt.ylabel("Range (meters)")
