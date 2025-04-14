@@ -109,7 +109,7 @@ for v0 in velocities:
     angles, ranges = projectile_range(v0)
     plt.plot(angles, ranges, label=f'$v_0 = {v0}$ m/s')
 
-# Pyton/plot
+# Python/plot
 plt.title("Range vs. Projection Angle")
 plt.xlabel("Angle (degrees)")
 plt.ylabel("Range (meters)")
