@@ -90,6 +90,32 @@ plt.figure(figsize=(10, 6))
 for v0 in velocities:
     angles, ranges = projectile_range(v0)
     plt.plot(angles, ranges, label=f'$v_0 = {v0}$ m/s')
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Fonksiyon: belirli bir ilk hızla açıya göre menzili hesaplar
+def projectile_range(v0, g=9.81):
+    angles_deg = np.linspace(0, 90, 500)  # Açıları 0–90 derece arasında al
+    angles_rad = np.radians(angles_deg)  # Radyana çevir
+    ranges = (v0**2) * np.sin(2 * angles_rad) / g  # Menzil formülü
+    return angles_deg, ranges
+
+# Farklı ilk hızlar için simülasyon
+velocities = [10, 20, 30]  # m/s
+plt.figure(figsize=(10, 6))
+
+for v0 in velocities:
+    angles, ranges = projectile_range(v0)
+    plt.plot(angles, ranges, label=f'$v_0 = {v0}$ m/s')
+
+# Grafik ayarları
+plt.title("Range vs. Projection Angle")
+plt.xlabel("Angle (degrees)")
+plt.ylabel("Range (meters)")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
 
 plt.title("Range vs. Projection Angle")
 plt.xlabel("Angle (degrees)")
