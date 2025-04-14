@@ -133,6 +133,7 @@ plt.show()
 
 =======
 ![image](https://github.com/user-attachments/assets/7c49c8ad-31f7-47f3-8431-5cf4a0b96882)
+![image](https://github.com/user-attachments/assets/6614adaa-dada-4c5b-b70a-1a5df58dda9a)
 
 -
  
