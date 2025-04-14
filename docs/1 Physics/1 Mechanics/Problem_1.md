@@ -38,16 +38,53 @@ Range is maximized when
 
 For a fixed  and , different angles yield different ranges
 
-The symmetry: 
+## Governing Equations
+
+We begin with the basic kinematic equations for projectile motion. Assuming no air resistance and a flat launch/landing surface:
+
+Let:
+
+$v_0$: initial velocity
+
+$\theta$: angle of projection
+
+$g$: gravitational acceleration
+
+The horizontal and vertical components of the initial velocity are:
+
+
+
+The time of flight is:
+
+
+
+The horizontal range $R$ becomes:
+
+
+
+## Observations:
+
+Range is maximized when $\sin(2\theta) = 1 \Rightarrow 2\theta = 90^{\circ} \Rightarrow \theta = 45^{\circ}$
+
+For a fixed $v_0$ and $g$, different angles yield different ranges
+
+The symmetry: $R(\theta) = R(90^{\circ} - \theta)$
+
+
 
 # 2. Analysis of the Range
 
 Using the range formula:
 
+This function peaks at $\theta = 45^{\circ}$ and exhibits a parabolic relationship.
 
+Influence of Other Parameters
 
-This function peaks at  and exhibits a parabolic relationship.
+Initial Velocity: Range increases quadratically with $v_0$
 
+Gravity: Inverse relationship — greater $g$ reduces the range
+
+Launch Height: Introduces an asymmetry and increases max range, but breaks analytical simplicity
 Influence of Other Parameters
 
 Initial Velocity: Range increases quadratically with 
@@ -59,7 +96,15 @@ Launch Height: Introduces an asymmetry and increases max range, but breaks analy
 # 3. Practical Applications
 
 The basic model assumes flat terrain and no air resistance. However, real-world adaptations include:
+The basic model assumes flat terrain and no air resistance. However, real-world adaptations include:
 
+Launching projectiles from elevated platforms
+
+Factoring in wind resistance or drag forces ($F_d \propto v^2$)
+
+Non-uniform gravitational fields (e.g., planetary launches)
+
+Such complexities are addressed through numerical simulation methods or empirical correction models.
 Launching projectiles from elevated platforms
 
 Factoring in wind resistance or drag forces ()
@@ -72,6 +117,14 @@ Such complexities are addressed through numerical simulation methods or empirica
 
 Below is a Python script that simulates and plots the range as a function of angle for various initial velocities.
 
+import numpy as np
+import matplotlib.pyplot as plt
+
+def projectile_range(v0, g=9.81):
+    angles_deg = np.linspace(0, 90, 500)
+    angles_rad = np.radians(angles_deg)
+    ranges = (v0**2) * np.sin(2 * angles_rad) / g
+    return angles_deg, ranges
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -96,7 +149,22 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()
+# Simulation for different velocities
+velocities = [10, 20, 30]
+plt.figure(figsize=(10, 6))
 
+for v0 in velocities:
+    angles, ranges = projectile_range(v0)
+    plt.plot(angles, ranges, label=f'v0 = {v0} m/s')
+
+plt.title("Range vs. Projection Angle")
+plt.xlabel("Angle (degrees)")
+plt.ylabel("Range (meters)")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
+![alt text](output.png)
 # 5. Graphical Interpretation
 
 The graph shows a clear peak at  for each velocity.
@@ -104,7 +172,11 @@ The graph shows a clear peak at  for each velocity.
 Higher initial velocities stretch the curve upward proportionally.
 
 The symmetry confirms the theoretical relation 
+The graph shows a clear peak at $45^{\circ}$ for each velocity.
 
+Higher initial velocities stretch the curve upward proportionally.
+
+The symmetry confirms the theoretical relation $R(\theta) = R(90^{\circ} - \theta)$
 # 6. Limitations & Extensions
 
 ## Limitations:
@@ -120,7 +192,11 @@ Implement drag force (e.g., Euler’s method for )
 Incorporate different terrains and elevation changes
 
 Add wind components to assess horizontal deflection
+Implement drag force (e.g., Euler’s method for $F_d = -kv^2$)
 
+Incorporate different terrains and elevation changes
+
+Add wind components to assess horizontal deflection
 # Summary
 
 Projectile motion, especially range analysis, offers a clear and accessible way to apply physics and computational tools. Starting from a simple closed-form solution, we extend understanding using numerical simulations and graphical interpretations.
