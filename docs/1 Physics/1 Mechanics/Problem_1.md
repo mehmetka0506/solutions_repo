@@ -8,123 +8,72 @@ The horizontal range is not only influenced by the angle but also by several key
 
 # 1. Theoretical Foundation
 
-## Governing Equations
+Governing Equations
 
-We begin with the basic kinematic equations for projectile motion. Assuming no air resistance and a flat launch/landing surface:
+Assuming no air resistance and that the projectile is launched and lands at the same height:
 
 Let:
 
-: initial velocity
+$v_0$: Initial velocity
 
-: angle of projection
+$\theta$: Angle of projection
 
-: gravitational acceleration
+$g$: Gravitational acceleration
 
-The horizontal and vertical components of the initial velocity are:
+The velocity components:
+
+$v_{0x} = v_0 \cos(\theta)$
+
+$v_{0y} = v_0 \sin(\theta)$
+
+Time of flight:
 
 
 
-The time of flight is:
-
-
-
-The horizontal range  becomes:
+Range:
 
 
 
 Observations:
 
-Range is maximized when 
+Maximum range occurs at $\theta = 45^\circ$
 
-For a fixed  and , different angles yield different ranges
+The function $R(\theta)$ is symmetric about $45^\circ$: $R(\theta) = R(90^\circ - \theta)$
 
-## Governing Equations
+Range increases quadratically with $v_0$
 
-We begin with the basic kinematic equations for projectile motion. Assuming no air resistance and a flat launch/landing surface:
-
-Let:
-
-$v_0$: initial velocity
-
-$\theta$: angle of projection
-
-$g$: gravitational acceleration
-
-The horizontal and vertical components of the initial velocity are:
-
-
-
-The time of flight is:
-
-
-
-The horizontal range $R$ becomes:
-
-
-
-## Observations:
-
-Range is maximized when $\sin(2\theta) = 1 \Rightarrow 2\theta = 90^{\circ} \Rightarrow \theta = 45^{\circ}$
-
-For a fixed $v_0$ and $g$, different angles yield different ranges
-
-The symmetry: $R(\theta) = R(90^{\circ} - \theta)$
-
-
+Range decreases inversely with $g$
 
 # 2. Analysis of the Range
 
-Using the range formula:
+By varying $\theta$ from $0^\circ$ to $90^\circ$, we observe:
 
-This function peaks at $\theta = 45^{\circ}$ and exhibits a parabolic relationship.
+Parabolic relationship
 
-Influence of Other Parameters
+Peak at $45^\circ$
 
-Initial Velocity: Range increases quadratically with $v_0$
+Changes in:
 
-Gravity: Inverse relationship — greater $g$ reduces the range
+Initial velocity ($v_0$): Quadratic increase in range
 
-Launch Height: Introduces an asymmetry and increases max range, but breaks analytical simplicity
-Influence of Other Parameters
+Gravitational acceleration ($g$): Inversely proportional effect
 
-Initial Velocity: Range increases quadratically with 
-
-Gravity: Inverse relationship — greater  reduces the range
-
-Launch Height: Introduces an asymmetry and increases max range, but breaks analytical simplicity
+Launch height: Adds asymmetry, shifts optimal angle higher than $45^\circ$
 
 # 3. Practical Applications
 
-The basic model assumes flat terrain and no air resistance. However, real-world adaptations include:
-The basic model assumes flat terrain and no air resistance. However, real-world adaptations include:
+Real-world considerations include:
 
-Launching projectiles from elevated platforms
+Launching from elevated platforms (non-zero launch height)
 
-Factoring in wind resistance or drag forces ($F_d \propto v^2$)
+Air resistance and wind ($F_d = -kv^2$)
 
-Non-uniform gravitational fields (e.g., planetary launches)
+Ballistics, sports, and rocket launches
 
-Such complexities are addressed through numerical simulation methods or empirical correction models.
-Launching projectiles from elevated platforms
-
-Factoring in wind resistance or drag forces ()
-
-Non-uniform gravitational fields (e.g., planetary launches)
-
-Such complexities are addressed through numerical simulation methods or empirical correction models.
+Trajectories on other planets with different $g$
 
 # 4. Implementation (Python Simulation)
 
-Below is a Python script that simulates and plots the range as a function of angle for various initial velocities.
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-def projectile_range(v0, g=9.81):
-    angles_deg = np.linspace(0, 90, 500)
-    angles_rad = np.radians(angles_deg)
-    ranges = (v0**2) * np.sin(2 * angles_rad) / g
-    return angles_deg, ranges
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -140,7 +89,7 @@ plt.figure(figsize=(10, 6))
 
 for v0 in velocities:
     angles, ranges = projectile_range(v0)
-    plt.plot(angles, ranges, label=f'v0 = {v0} m/s')
+    plt.plot(angles, ranges, label=f'$v_0 = {v0}$ m/s')
 
 plt.title("Range vs. Projection Angle")
 plt.xlabel("Angle (degrees)")
@@ -149,6 +98,14 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()
+plt.title("Range vs. Projection Angle")
+plt.xlabel("Angle (degrees)")
+plt.ylabel("Range (meters)")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
+![alt text](image.png)
 # Simulation for different velocities
 velocities = [10, 20, 30]
 plt.figure(figsize=(10, 6))
@@ -164,42 +121,33 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()
-![alt text](output.png)
 # 5. Graphical Interpretation
 
-The graph shows a clear peak at  for each velocity.
+All curves peak at $\theta = 45^\circ$
 
-Higher initial velocities stretch the curve upward proportionally.
+Higher $v_0$ values stretch the curve upward
 
-The symmetry confirms the theoretical relation 
-The graph shows a clear peak at $45^{\circ}$ for each velocity.
+Confirms $R(\theta) = R(90^\circ - \theta)$
 
-Higher initial velocities stretch the curve upward proportionally.
-
-The symmetry confirms the theoretical relation $R(\theta) = R(90^{\circ} - \theta)$
 # 6. Limitations & Extensions
 
-## Limitations:
+Limitations:
 
-Ignores air resistance, which becomes significant at higher velocities
+Ignores air resistance
 
-Assumes flat terrain and level launch/landing height
+Assumes flat ground and equal launch/landing height
 
-## Suggested Extensions:
+Extensions:
 
-Implement drag force (e.g., Euler’s method for )
+Include drag force: $F_d = -kv^2$
 
-Incorporate different terrains and elevation changes
+Numerical solvers (e.g., Euler or Runge-Kutta)
 
-Add wind components to assess horizontal deflection
-Implement drag force (e.g., Euler’s method for $F_d = -kv^2$)
+Model different terrains or sloped launches
 
-Incorporate different terrains and elevation changes
+Consider wind or planetary variations in $g$
 
-Add wind components to assess horizontal deflection
 # Summary
 
-Projectile motion, especially range analysis, offers a clear and accessible way to apply physics and computational tools. Starting from a simple closed-form solution, we extend understanding using numerical simulations and graphical interpretations.
-
-This problem links core physics, programming, and real-world phenomena in a way that highlights both the power and limitations of idealized models.
+Projectile motion offers an ideal way to blend theory and computation. By analyzing the range as a function of angle and velocity, we uncover elegant mathematical relationships and useful simulation strategies. These insights find application across fields like sports science, military engineering, and aerospace trajectory planning.
 
