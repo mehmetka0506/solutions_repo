@@ -85,6 +85,31 @@ Including air resistance, wind, or launching from non-level terrain are real-wor
 
 ## Implementation
 Below are Python scripts simulating projectile motion under the given scenarios.
+import numpy as np
+import matplotlib.pyplot as plt
+
+def projectile(v0, angle_deg, g=9.81):
+    angle_rad = np.radians(angle_deg)
+    t_flight = 2 * v0 * np.sin(angle_rad) / g
+    t = np.linspace(0, t_flight, num=500)
+    x = v0 * np.cos(angle_rad) * t
+    y = v0 * np.sin(angle_rad) * t - 0.5 * g * t**2
+    return x, y
+
+velocities = [30, 40, 50]
+angle = 45
+
+plt.figure(figsize=(10,6))
+for v0 in velocities:
+    x, y = projectile(v0, angle)
+    plt.plot(x, y, label=f'$v_0$ = {v0} m/s')
+
+plt.title("Projectile Motion at 45° with Different Velocities")
+plt.xlabel("Horizontal Distance (m)")
+plt.ylabel("Vertical Distance (m)")
+plt.grid(True)
+plt.legend()
+plt.show()
 ![alt text](image-4.png)
 Scenario 1: 45° angle, different velocities (30, 40, 50 m/s)
 python
@@ -133,6 +158,20 @@ plt.legend()
 plt.show()
 Graphical Representations
 In the first plot, as initial velocity increases, range increases significantly.
+angles = [15, 45, 75]
+v0 = 50
+
+plt.figure(figsize=(10,6))
+for angle in angles:
+    x, y = projectile(v0, angle)
+    plt.plot(x, y, label=f'$\\theta$ = {angle}°')
+
+plt.title("Projectile Motion at 50 m/s with Different Angles")
+plt.xlabel("Horizontal Distance (m)")
+plt.ylabel("Vertical Distance (m)")
+plt.grid(True)
+plt.legend()
+plt.show()
 ![alt text](image-3.png)
 In the second plot, $45^\circ$ provides the maximum range, while $15^\circ$ and $75^\circ$ give the same (shorter) range.
 
