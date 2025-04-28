@@ -181,247 +181,39 @@
 <p><span class="arithmatex">\(v_0\)</span> = Initial velocity</p>
 <p><span class="arithmatex">\(\theta\)</span> = Angle of projection</p>
 <p><span class="arithmatex">\(g\)</span> = Gravitational acceleration</p>
-<p>The equations of motion are:</p>
-<p>𝑑
-2
-𝑥
-𝑑
-𝑡
-2
-=
-0
-⇒
-𝑑
-𝑥
-𝑑
-𝑡
-=
-𝑣
-0
-cos
-⁡
-(
-𝜃
-)
-dt 
-2</p>
-<p>d 
-2
- x
-​
- =0⇒ 
-dt
-dx
-​
- =v 
-0
-​
- cos(θ)
-𝑑
-2
-𝑦
-𝑑
-𝑡
-2
-=
-−
-𝑔
-⇒
-𝑑
-𝑦
-𝑑
-𝑡
-=
-𝑣
-0
-sin
-⁡
-(
-𝜃
-)
-−
-𝑔
-𝑡
-dt 
-2</p>
-<p>d 
-2
- y
-​
- =−g⇒ 
-dt
-dy
-​
- =v 
-0
-​
- sin(θ)−gt
-Integrating these:</p>
-<p>𝑥
-(
-𝑡
-)
-=
-𝑣
-0
-cos
-⁡
-(
-𝜃
-)
-𝑡
-x(t)=v 
-0
-​
- cos(θ)t
-𝑦
-(
-𝑡
-)
-=
-𝑣
-0
-sin
-⁡
-(
-𝜃
-)
-𝑡
-−
-1
-2
-𝑔
-𝑡
-2
-y(t)=v 0
-​
- sin(θ)t− 
-2
-1
-​
- gt 
-2</p>
-<p>Time of Flight
-Setting <span class="arithmatex">\(y=0\)</span> at landing:</p>
-<h1 id="0">0</h1>
-<p>𝑣
-0
-sin
-⁡
-(
-𝜃
-)
-𝑇
-−
-1
-2
-𝑔
-𝑇
-2
-0=v 
-0
-​
- sin(θ)T− 
-2
-1
-​
- gT 
-2</p>
-<p>Solving
-𝑇=
-2
-𝑣
-0
-sin
-⁡
-(
-𝜃
-)
-𝑔
-T= 
-g
-2v 
-0
-​
- sin(θ)
-​</p>
-<p>Range
-Horizontal distance covered:</p>
-<p>𝑅=
-𝑣
-0
-cos
-⁡
-(
-𝜃
-)
-𝑇
-=
-𝑣
-0
-2
-sin
-⁡
-(
-2
-𝜃
-)
-𝑔
-R=v 
-0
-​
- cos(θ)T= 
-g
-v 
-0
-2
-​
- sin(2θ)
-​</p>
-<p>Maximum Height</p>
-<p>𝐻 =
-𝑣
-0
-2
-sin
-⁡
-2
-(
-𝜃
-)
-2
-𝑔
-H= 
-2g
-v 
-0
-2
-​
- sin 
-2
- (θ)
-​</p>
-<p>Analysis of the Range
-From the range formula:</p>
-<p>𝑅 =
-𝑣
-0
-2
-sin
-⁡
-(
-2
-𝜃
-)
-𝑔
-R= 
-g
-v 
-0
-2
-​
- sin(2θ)
-​</p>
+<p>The equations of motion are:
+$$
+\frac{d^2x}{dt^2} = 0 \quad \Rightarrow \quad \frac{dx}{dt} = v_0 \cos(\theta)
+$$</p>
+<div class="arithmatex">\[
+\frac{d^2y}{dt^2} = -g \quad \Rightarrow \quad \frac{dy}{dt} = v_0 \sin(\theta) - gt
+\]</div>
+<p>Integrating these:</p>
+<div class="arithmatex">\[
+x(t) = v_0 \cos(\theta) t
+\]</div>
+<div class="arithmatex">\[
+y(t) = v_0 \sin(\theta) t - \frac{1}{2}gt^2
+\]</div>
+<h2 id="time-of-flight">Time of Flight</h2>
+<p>Setting <span class="arithmatex">\(y = 0\)</span> at landing:</p>
+<div class="arithmatex">\[
+0 = v_0 \sin(\theta) T - \frac{1}{2}gT^2
+\]</div>
+<h2 id="solving-for-t">Solving for T</h2>
+<div class="arithmatex">\[
+T = \frac{2v_0 \sin(\theta)}{g}
+\]</div>
+<h2 id="range">Range</h2>
+<p>Horizontal distance covered:</p>
+<div class="arithmatex">\[
+R = v_0 \cos(\theta) T = \frac{v_0^2 \sin(2\theta)}{g}
+\]</div>
+<h2 id="maximum-height">Maximum Height</h2>
+<p>The maximum vertical position:</p>
+<div class="arithmatex">\[
+H = \frac{v_0^2 \sin^2(\theta)}{2g}
+\]</div>
 <h2 id="observations">Observations</h2>
 <p>Maximum range occurs when <span class="arithmatex">\(\sin(2\theta) = 1\)</span>, that is, <span class="arithmatex">\(\theta = 45^\circ\)</span></p>
 <p>Symmetry: <span class="arithmatex">\(R(\theta) = R(90^\circ - \theta)\)</span></p>
