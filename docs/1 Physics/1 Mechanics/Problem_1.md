@@ -85,6 +85,8 @@ Including air resistance, wind, or launching from non-level terrain are real-wor
 
 ## Implementation
 Below are Python scripts simulating projectile motion under the given scenarios.
+
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -110,10 +112,13 @@ plt.ylabel("Vertical Distance (m)")
 plt.grid(True)
 plt.legend()
 plt.show()
+```
+
 ![alt text](image-4.png)
 Scenario 1: 45° angle, different velocities (30, 40, 50 m/s)
-python
 
+
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -139,9 +144,11 @@ plt.ylabel("Vertical Distance (m)")
 plt.grid(True)
 plt.legend()
 plt.show()
-Scenario 2: 50 m/s, different angles (15°, 45°, 75°)
-python
+```
 
+Scenario 2: 50 m/s, different angles (15°, 45°, 75°)
+
+```python
 angles = [15, 45, 75]
 v0 = 50
 
@@ -172,7 +179,10 @@ plt.ylabel("Vertical Distance (m)")
 plt.grid(True)
 plt.legend()
 plt.show()
+```
+
 ![alt text](image-3.png)
+
 In the second plot, $45^\circ$ provides the maximum range, while $15^\circ$ and $75^\circ$ give the same (shorter) range.
 
 ## Limitations and Extensions
