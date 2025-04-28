@@ -15,261 +15,53 @@ $\theta$ = Angle of projection
 $g$ = Gravitational acceleration
 
 The equations of motion are:
+$$
+\frac{d^2x}{dt^2} = 0 \quad \Rightarrow \quad \frac{dx}{dt} = v_0 \cos(\theta)
+$$
 
-𝑑
-2
-𝑥
-𝑑
-𝑡
-2
-=
-0
-⇒
-𝑑
-𝑥
-𝑑
-𝑡
-=
-𝑣
-0
-cos
-⁡
-(
-𝜃
-)
-dt 
-2
- 
-d 
-2
- x
-​
- =0⇒ 
-dt
-dx
-​
- =v 
-0
-​
- cos(θ)
-𝑑
-2
-𝑦
-𝑑
-𝑡
-2
-=
-−
-𝑔
-⇒
-𝑑
-𝑦
-𝑑
-𝑡
-=
-𝑣
-0
-sin
-⁡
-(
-𝜃
-)
-−
-𝑔
-𝑡
-dt 
-2
- 
-d 
-2
- y
-​
- =−g⇒ 
-dt
-dy
-​
- =v 
-0
-​
- sin(θ)−gt
+$$
+\frac{d^2y}{dt^2} = -g \quad \Rightarrow \quad \frac{dy}{dt} = v_0 \sin(\theta) - gt
+$$
+
 Integrating these:
 
-𝑥
-(
-𝑡
-)
-=
-𝑣
-0
-cos
-⁡
-(
-𝜃
-)
-𝑡
-x(t)=v 
-0
-​
- cos(θ)t
-𝑦
-(
-𝑡
-)
-=
-𝑣
-0
-sin
-⁡
-(
-𝜃
-)
-𝑡
-−
-1
-2
-𝑔
-𝑡
-2
-y(t)=v 0
-​
- sin(θ)t− 
-2
-1
-​
- gt 
-2
- 
-Time of Flight
-Setting $y=0$ at landing:
+$$
+x(t) = v_0 \cos(\theta) t
+$$
 
-0
-=
-𝑣
-0
-sin
-⁡
-(
-𝜃
-)
-𝑇
-−
-1
-2
-𝑔
-𝑇
-2
-0=v 
-0
-​
- sin(θ)T− 
-2
-1
-​
- gT 
-2
- 
-Solving
-𝑇=
-2
-𝑣
-0
-sin
-⁡
-(
-𝜃
-)
-𝑔
-T= 
-g
-2v 
-0
-​
- sin(θ)
-​
- 
-Range
+$$
+y(t) = v_0 \sin(\theta) t - \frac{1}{2}gt^2
+$$
+
+## Time of Flight
+
+Setting $y = 0$ at landing:
+
+$$
+0 = v_0 \sin(\theta) T - \frac{1}{2}gT^2
+$$
+
+## Solving for T
+
+$$
+T = \frac{2v_0 \sin(\theta)}{g}
+$$
+
+## Range
+
 Horizontal distance covered:
 
-𝑅=
-𝑣
-0
-cos
-⁡
-(
-𝜃
-)
-𝑇
-=
-𝑣
-0
-2
-sin
-⁡
-(
-2
-𝜃
-)
-𝑔
-R=v 
-0
-​
- cos(θ)T= 
-g
-v 
-0
-2
-​
- sin(2θ)
-​
- 
-Maximum Height
+$$
+R = v_0 \cos(\theta) T = \frac{v_0^2 \sin(2\theta)}{g}
+$$
 
-𝐻 =
-𝑣
-0
-2
-sin
-⁡
-2
-(
-𝜃
-)
-2
-𝑔
-H= 
-2g
-v 
-0
-2
-​
- sin 
-2
- (θ)
-​
- 
-Analysis of the Range
-From the range formula:
+## Maximum Height
 
-𝑅 =
-𝑣
-0
-2
-sin
-⁡
-(
-2
-𝜃
-)
-𝑔
-R= 
-g
-v 
-0
-2
-​
- sin(2θ)
-​
- 
+The maximum vertical position:
+
+$$
+H = \frac{v_0^2 \sin^2(\theta)}{2g}
+$$
 ## Observations
 Maximum range occurs when $\sin(2\theta) = 1$, that is, $\theta = 45^\circ$
 
