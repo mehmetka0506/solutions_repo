@@ -228,6 +228,27 @@ Sports: Finding the best launch angles for throws, shots, or kicks.</p>
 <p>Including air resistance, wind, or launching from non-level terrain are real-world complications addressed with numerical methods.</p>
 <h2 id="implementation">Implementation</h2>
 <p>Below are Python scripts simulating projectile motion under the given scenarios.
+import numpy as np
+import matplotlib.pyplot as plt</p>
+<p>def projectile(v0, angle_deg, g=9.81):
+    angle_rad = np.radians(angle_deg)
+    t_flight = 2 * v0 * np.sin(angle_rad) / g
+    t = np.linspace(0, t_flight, num=500)
+    x = v0 * np.cos(angle_rad) * t
+    y = v0 * np.sin(angle_rad) * t - 0.5 * g * t**2
+    return x, y</p>
+<p>velocities = [30, 40, 50]
+angle = 45</p>
+<p>plt.figure(figsize=(10,6))
+for v0 in velocities:
+    x, y = projectile(v0, angle)
+    plt.plot(x, y, label=f'<span class="arithmatex">\(v_0\)</span> = {v0} m/s')</p>
+<p>plt.title("Projectile Motion at 45° with Different Velocities")
+plt.xlabel("Horizontal Distance (m)")
+plt.ylabel("Vertical Distance (m)")
+plt.grid(True)
+plt.legend()
+plt.show()
 <img alt="alt text" src="../image-4.png"/>
 Scenario 1: 45° angle, different velocities (30, 40, 50 m/s)
 python</p>
@@ -268,6 +289,18 @@ plt.legend()
 plt.show()
 Graphical Representations
 In the first plot, as initial velocity increases, range increases significantly.
+angles = [15, 45, 75]
+v0 = 50</p>
+<p>plt.figure(figsize=(10,6))
+for angle in angles:
+    x, y = projectile(v0, angle)
+    plt.plot(x, y, label=f'<span class="arithmatex">\(\\theta\)</span> = {angle}°')</p>
+<p>plt.title("Projectile Motion at 50 m/s with Different Angles")
+plt.xlabel("Horizontal Distance (m)")
+plt.ylabel("Vertical Distance (m)")
+plt.grid(True)
+plt.legend()
+plt.show()
 <img alt="alt text" src="../image-3.png"/>
 In the second plot, <span class="arithmatex">\(45^\circ\)</span> provides the maximum range, while <span class="arithmatex">\(15^\circ\)</span> and <span class="arithmatex">\(75^\circ\)</span> give the same (shorter) range.</p>
 <h2 id="limitations-and-extensions">Limitations and Extensions</h2>
