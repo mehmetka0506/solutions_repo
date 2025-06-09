@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Trajectories of a Freely Released Payload Near Earth - Physics and Mathematics</title>
+<title>Gravity Problem 3 - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Trajectories of a Freely Released Payload Near Earth";
+        var mkdocs_page_name = "Gravity Problem 3";
         var mkdocs_page_input_path = "1 Physics/2 Gravity/Problem_3.md";
         var mkdocs_page_url = null;
       </script>
@@ -58,8 +58,32 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Gravity Problem 2</a>
 </li>
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Trajectories of a Freely Released Payload Near Earth</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Gravity Problem 3</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#trajectories-of-a-freely-released-payload-near-earth">Trajectories of a Freely Released Payload Near Earth</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#motivation">Motivation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#theoretical-background">Theoretical Background</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#energy-based-trajectory-classification">Energy-Based Trajectory Classification:</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#simulation-parameters">Simulation Parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#python-simulation-code">Python Simulation Code</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_1"></a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#output-plot-observations">Output Plot &amp; Observations</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#real-world-relevance">Real-World Relevance</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#colab-link">Colab Link</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +187,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">2 Gravity</li>
-<li class="breadcrumb-item active">Trajectories of a Freely Released Payload Near Earth</li>
+<li class="breadcrumb-item active">Gravity Problem 3</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,74 +195,203 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="trajectories-of-a-freely-released-payload-near-earth">Trajectories of a Freely Released Payload Near Earth</h1>
-<h1 id="motivation">Motivation</h1>
-<p>The trajectory of an object released from a rocket near Earth depends significantly on initial conditions such as position, altitude, and velocity. This problem integrates orbital mechanics and numerical analysis, essential for real-world applications in satellite deployment, orbital insertion, reentry strategies, and space exploration.</p>
-<h1 id="types-of-trajectories">Types of Trajectories</h1>
-<p>When a payload is released near Earth, its trajectory may take one of three forms:</p>
-<p>Elliptical Trajectory: Bound orbit around Earth.</p>
-<p>Parabolic Trajectory: Exactly at escape velocity, theoretically escaping Earth’s gravitational influence.</p>
-<p>Hyperbolic Trajectory: Exceeding escape velocity, permanently escaping Earth’s gravitational pull.</p>
-<p>The type of trajectory depends primarily on the initial velocity relative to Earth's gravitational pull.</p>
-<p>Mathematical Analysis</p>
-<p>Using Newton’s Law of Universal Gravitation:</p>
-<p>Where:</p>
-<p><span class="arithmatex">\(G\)</span> is gravitational constant</p>
-<p><span class="arithmatex">\(M\)</span> is mass of Earth</p>
-<p><span class="arithmatex">\(m\)</span> is payload mass (cancels out in trajectory calculations)</p>
-<p><span class="arithmatex">\(r\)</span> is distance from Earth’s center</p>
-<p>Energy Considerations:</p>
-<p>Total mechanical energy determines the trajectory type:</p>
-<p>Elliptical: <span class="arithmatex">\(E &lt; 0\)</span></p>
-<p>Parabolic: <span class="arithmatex">\(E = 0\)</span></p>
-<p>Hyperbolic: <span class="arithmatex">\(E &gt; 0\)</span></p>
-<p>Numerical Simulation (Python)</p>
-<p>Below is a Python script to numerically simulate and visualize payload trajectories:</p>
-<p>import numpy as np
+<h1 id="gravity-problem-3">Gravity Problem 3</h1>
+<h2 id="trajectories-of-a-freely-released-payload-near-earth">Trajectories of a Freely Released Payload Near Earth</h2>
+<hr/>
+<h2 id="motivation">Motivation</h2>
+<p>When an object is released from a moving rocket near Earth, its trajectory depends on <strong>initial conditions</strong> and <strong>gravitational forces</strong>. This problem combines <strong>orbital mechanics</strong> and <strong>numerical simulations</strong>. Understanding these trajectories is vital for:</p>
+<ul>
+<li>Satellite deployment   </li>
+<li>Orbital insertion  </li>
+<li>Reentry planning  </li>
+<li>Escape missions from Earth   </li>
+</ul>
+<hr/>
+<h2 id="theoretical-background">Theoretical Background</h2>
+<p>Gravitational force acting on a mass:</p>
+<div class="arithmatex">\[
+F = \frac{GMm}{r^2}
+\]</div>
+<p>Where:<br/>
+- <span class="arithmatex">\( G = 6.67430 \times 10^{-11} \ \text{m}^3\text{kg}^{-1}\text{s}^{-2} \)</span> (Gravitational constant)<br/>
+- <span class="arithmatex">\( M \)</span> is the Earth's mass<br/>
+- <span class="arithmatex">\( m \)</span> is the payload mass<br/>
+- <span class="arithmatex">\( r \)</span> is the distance from the center of Earth  </p>
+<h3 id="energy-based-trajectory-classification">Energy-Based Trajectory Classification:</h3>
+<p>Total mechanical energy:<br/>
+$$
+E = \frac{1}{2}mv^2 - \frac{GMm}{r}
+$$</p>
+<ul>
+<li>If <span class="arithmatex">\( E &lt; 0 \)</span> → <strong>Elliptical Orbit</strong> </li>
+<li>If <span class="arithmatex">\( E = 0 \)</span> → <strong>Parabolic Trajectory</strong> </li>
+<li>If <span class="arithmatex">\( E &gt; 0 \)</span> → <strong>Hyperbolic Trajectory</strong> </li>
+</ul>
+<hr/>
+<h2 id="simulation-parameters">Simulation Parameters</h2>
+<ul>
+<li><strong>Initial altitude</strong> = 800 km above Earth's surface  </li>
+<li><strong>Start point</strong> is placed at (0, R + 800e3) → clearly visible to the right of Earth  </li>
+<li><strong>Initial velocities</strong> from <strong>5.0 km/s</strong> to <strong>13.0 km/s</strong>, with <strong>0.5 km/s</strong> increments</li>
+</ul>
+<hr/>
+<h2 id="python-simulation-code">Python Simulation Code</h2>
+<pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp</p>
-<h1 id="constants">Constants</h1>
-<p>G = 6.67430e-11
+from scipy.integrate import solve_ivp
+import matplotlib.animation as animation
+from IPython.display import HTML
+
+G = 6.67430e-11          # Evrensel çekim sabiti
+M = 5.972e24             # Dünya kütlesi (kg)
+R_earth = 6.371e6        # Dünya yarıçapı (m)
+altitude = 800e3         # Başlangıç yüksekliği (800 km)
+r0 = R_earth + altitude
+
+velocities = [5e3, 7.5e3, 11.5e3]  # km/s: 5.0, 7.5, 11.5
+
+colors = ['red', 'green', 'blue']
+labels = ['5.0 km/s', '7.5 km/s', '11.5 km/s']
+trajectories = []
+
+def motion(t, y):
+    x, y_pos, vx, vy = y
+    r = np.sqrt(x**2 + y_pos**2)
+    ax = -G * M * x / r**3
+    ay = -G * M * y_pos / r**3
+    return [vx, vy, ax, ay]
+
+for v in velocities:
+    y0 = [0, r0, v, 0]  # pozisyon ve hız
+    sol = solve_ivp(motion, [0, 7000], y0, max_step=5)
+    trajectories.append((sol.y[0] / 1e6, sol.y[1] / 1e6))  # km cinsinden
+
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.set_xlim(-10, 30)
+ax.set_ylim(-10, 30)
+ax.set_xlabel('X (1000 km)')
+ax.set_ylabel('Y (1000 km)')
+ax.set_title('Payload Trajectories Animation')
+ax.grid(True)
+earth = plt.Circle((0, 0), R_earth / 1e6, color='blue', alpha=0.3)
+ax.add_patch(earth)
+lines = [ax.plot([], [], color=c, label=l)[0] for c, l in zip(colors, labels)]
+points = [ax.plot([], [], 'o', color=c)[0] for c in colors]
+ax.legend()
+
+def init():
+    for line, point in zip(lines, points):
+        line.set_data([], [])
+        point.set_data([], [])
+    return lines + points
+
+def update(frame):
+    for i, (x, y) in enumerate(trajectories):
+        if frame &lt; len(x):
+            lines[i].set_data(x[:frame], y[:frame])
+            points[i].set_data([x[frame]], [y[frame]]) # Pass as sequences
+    return lines + points
+
+ani = animation.FuncAnimation(fig, update, frames=400, init_func=init, blit=True, interval=40)
+
+HTML(ani.to_jshtml())
+</code></pre>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+# Constants
+G = 6.67430e-11
 M = 5.972e24
-R_earth = 6.371e6</p>
-<h1 id="equations-of-motion">Equations of motion</h1>
-<p>def equations(t, y):
-    r = np.sqrt(y[0]<strong>2 + y[1]</strong>2)
-    ax = -G * M * y[0] / r<strong>3
-    ay = -G * M * y[1] / r</strong>3
-    return [y[2], y[3], ax, ay]</p>
-<h1 id="initial-conditions-altitude-400km-and-varying-velocities">Initial conditions: altitude (400km) and varying velocities</h1>
-<p>altitude = 400e3
-v_initial = np.sqrt(G*M/(R_earth+altitude))  # Circular orbital speed</p>
-<h1 id="initial-conditions-for-elliptical-parabolic-hyperbolic-trajectories">Initial conditions for elliptical, parabolic, hyperbolic trajectories</h1>
-<p>initial_conditions = [
-    (0, R_earth + altitude, 0.8 * v_initial, 0),  # Elliptical
-    (0, R_earth + altitude, v_initial<em>np.sqrt(2), 0),  # Parabolic
-    (0, R_earth + altitude, 1.2 * v_initial</em>np.sqrt(2), 0)  # Hyperbolic
-]</p>
-<p>labels = ['Elliptical', 'Parabolic', 'Hyperbolic']</p>
-<p>plt.figure(figsize=(10,10))</p>
-<p>for y0, label in zip(initial_conditions, labels):
-    sol = solve_ivp(equations, [0, 8000], y0, max_step=10)
-    plt.plot(sol.y[0]/1e6, sol.y[1]/1e6, label=label)
-<img alt="alt text" src="../image-2.png"/></p>
-<h1 id="earth-for-visualization">Earth for visualization</h1>
-<p>earth = plt.Circle((0, 0), R_earth/1e6, color='blue', alpha=0.3)
-plt.gca().add_artist(earth)</p>
-<p>plt.xlabel('X Position (1000 km)')
-plt.ylabel('Y Position (1000 km)')
-plt.title('Payload Trajectories Near Earth')
-plt.legend()
-plt.axis('equal')
+R_earth = 6.371e6
+altitude = 800e3
+r0 = R_earth + altitude
+
+# Equations of motion
+def motion(t, y):
+    x, y_pos, vx, vy = y
+    r = np.sqrt(x**2 + y_pos**2)
+    ax = -G * M * x / r**3
+    ay = -G * M * y_pos / r**3
+    return [vx, vy, ax, ay]
+
+# Initial velocities from 5 to 13 km/s
+velocities = np.arange(5e3, 13.5e3, 0.5e3)
+
+plt.figure(figsize=(10, 10))
+
+for v in velocities:
+    y0 = [0, r0, v, 0]  # Initial pos above Earth, velocity in +x direction
+    sol = solve_ivp(motion, [0, 6000], y0, max_step=5)
+    plt.plot(sol.y[0]/1e6, sol.y[1]/1e6, label=f'{v/1e3:.1f} km/s')
+
+# Plot Earth
+earth = plt.Circle((0, 0), R_earth/1e6, color='blue', alpha=0.3)
+plt.gca().add_artist(earth)
+
+plt.title("Payload Trajectories from 800 km Altitude")
+plt.xlabel("X Position (1000 km)")
+plt.ylabel("Y Position (1000 km)")
 plt.grid(True)
-plt.show()</p>
-<h1 id="real-world-applications">Real-world Applications</h1>
-<p>Orbital insertion: Payload velocity adjusted precisely for stable elliptical orbits.</p>
-<p>Satellite deployment: Payloads released at calculated velocities to achieve desired trajectories.</p>
-<p>Reentry: Adjusting velocities for payloads to safely reenter Earth’s atmosphere.</p>
-<p>Interplanetary exploration: Hyperbolic trajectories employed to leave Earth's gravitational influence for missions to other planets.</p>
-<h1 id="conclusion">Conclusion</h1>
-<p>Understanding and accurately calculating payload trajectories near Earth are vital in space missions. Numerical methods and simulations are essential tools for predicting and visualizing these trajectories, supporting successful mission outcomes.</p>
+plt.axis('equal')
+plt.legend()
+plt.show()
+</code></pre>
+<h2 id="_1"><img alt="alt text" src="../image-5.png"/></h2>
+<h2 id="output-plot-observations">Output Plot &amp; Observations</h2>
+<p>This plot clearly shows:</p>
+<ul>
+<li><strong>5.0–7.0 km/s:</strong> Payload crashes back to Earth  </li>
+<li><strong>7.5–8.5 km/s:</strong> Elliptical and nearly circular orbits  </li>
+<li><strong>11.2 km/s+:</strong> Escape velocities, resulting in open hyperbolic trajectories</li>
+</ul>
+<p>Dünya yarıçapı orantılı mavi daire ile çizildi. Payload başlama noktası 800 km yukarıda ve Dünya'nın sağındadır, hocanın belirttiği gibi.</p>
+<hr/>
+<h2 id="real-world-relevance">Real-World Relevance</h2>
+<table>
+<thead>
+<tr>
+<th>Use Case</th>
+<th>Velocity Range</th>
+<th>Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LEO Satellite Deployment</td>
+<td>~7.5 km/s</td>
+<td>Circular/Elliptical orbit</td>
+</tr>
+<tr>
+<td>ISS Missions</td>
+<td>~7.66 km/s</td>
+<td>Stable LEO orbit</td>
+</tr>
+<tr>
+<td>Lunar / Mars Missions</td>
+<td>&gt;11.2 km/s</td>
+<td>Escape trajectory (v₂)</td>
+</tr>
+<tr>
+<td>Reentry Capsule</td>
+<td>&lt;7.5 km/s</td>
+<td>Controlled fall or crash</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>Earth drawn to scale on plot  </li>
+<li>Initial position: 800 km above Earth  </li>
+<li>Velocities: 5.0 to 13.0 km/s (in 0.5 km/s steps)  </li>
+<li>Simulation uses Newtonian gravity + numerical integration  </li>
+<li>Graph clearly shows orbital vs escape behavior  </li>
+<li>Trajectories plotted with proper units &amp; legends  </li>
+</ul>
+<hr/>
+<h2 id="colab-link">Colab Link</h2>
+<p><a href="https://colab.research.google.com/drive/1s0NxhDjJcispFCyU53AokG6mcUptUEkF?usp=sharing">Colab – Gravity Problem 3 Simulation</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
