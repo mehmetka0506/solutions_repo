@@ -1,127 +1,217 @@
-# Escape Velocities and Cosmic Velocities
+# Gravity Problem 2
 
-# Motivation
+##  Escape Velocities and Cosmic Velocities
 
-Escape velocity and cosmic velocities are fundamental concepts in astrophysics, vital for understanding gravitational interactions and space exploration requirements. These velocities dictate the energy thresholds necessary for objects to orbit, escape, or leave a star system entirely.
+###  Motivation
 
-# Definitions and Physical Meanings
+Understanding escape and cosmic velocities is essential in space exploration. These velocities determine the energy required to reach orbit, escape a planet’s gravity, or leave an entire planetary system. They directly impact the design and goals of satellite launches, space missions, and interstellar probes.
 
-#1. First Cosmic Velocity (Orbital Velocity)
+---
 
-The velocity required for a stable circular orbit around a celestial body:
+##  Definitions of Cosmic Velocities
 
+###  First Cosmic Velocity ($v_1$)
 
+The **first cosmic velocity** is the **orbital speed** required to maintain a circular orbit near the surface of a planet:
 
-2. Second Cosmic Velocity (Escape Velocity)
+$$
+v_1 = \sqrt{\frac{G M}{r}}
+$$
 
-The minimum velocity required to escape the gravitational field of a celestial body without additional propulsion:
+Where:
+- $G$ = Gravitational constant ($6.67430 \times 10^{-11}$ m³/kg·s²)
+- $M$ = Mass of the planet
+- $r$ = Radius of the planet
 
+###  Second Cosmic Velocity ($v_2$)
 
+The **second cosmic velocity** is the **escape velocity** required to completely overcome the gravitational pull of a planet:
 
-3. Third Cosmic Velocity
+$$
+v_2 = \sqrt{2} v_1 = \sqrt{\frac{2 G M}{r}}
+$$
 
-The velocity required to escape the gravitational influence of the solar system from Earth's orbit:
+###  Third Cosmic Velocity ($v_3$)
 
+The **third cosmic velocity** is the **minimum speed required to escape the gravity of a planetary system**:
 
+$$
+v_3 = \sqrt{v_2^2 + v_{sun}^2}
+$$
 
-where $v_{orbital,sun}$ is Earth's orbital velocity around the Sun (~29.8 km/s).
+Where $v_{sun}$ is Earth’s orbital velocity around the Sun.
 
-# Mathematical Derivations
+---
 
-Orbital Velocity (First Cosmic Velocity)
+##  Derivations
 
-A stable circular orbit requires gravitational force to equal centripetal force:
+### 1. First Cosmic Velocity:
 
+From Newton’s law of gravitation and centripetal force:
 
+$$
+\frac{G M m}{r^2} = \frac{m v^2}{r} \Rightarrow v = \sqrt{\frac{G M}{r}}
+$$
 
-Escape Velocity (Second Cosmic Velocity)
+### 2. Second Cosmic Velocity:
 
-Escape velocity comes from energy conservation, equating kinetic and gravitational potential energies:
+From conservation of mechanical energy:
 
+$$
+\frac{1}{2}mv^2 - \frac{G M m}{r} = 0 \Rightarrow v = \sqrt{\frac{2 G M}{r}}
+$$
 
+### 3. Third Cosmic Velocity:
 
-Solar Escape Velocity (Third Cosmic Velocity)
+$$
+v_3 = \sqrt{v_{\text{escape}}^2 + v_E^2}
+$$
 
-The velocity needed to overcome both Earth's and the Sun’s gravitational pull:
+Where $v_E \approx 29.78$ km/s is Earth’s orbital velocity around the Sun.
 
+---
 
+##  Calculations for Earth, Mars, and Jupiter
 
-Calculations for Celestial Bodies
-
-Celestial Body
-
-Radius (m)
-
-Mass (kg)
-
-Earth
-
-$6.371 \times 10^6$
-
-$5.972 \times 10^{24}$
-
-Mars
-
-$3.3895 \times 10^6$
-
-$6.417 \times 10^{23}$
-
-Jupiter
-
-$6.9911 \times 10^7$
-
-$1.898 \times 10^{27}$
-
-Python Simulation and Visualization
-
+```python
 import numpy as np
 import matplotlib.pyplot as plt
-![alt text](image-1.png)
-# Constants
+
 G = 6.67430e-11
+
 bodies = {
-    'Earth': {'mass': 5.972e24, 'radius': 6.371e6},
-    'Mars': {'mass': 6.417e23, 'radius': 3.3895e6},
-    'Jupiter': {'mass': 1.898e27, 'radius': 6.9911e7}
+    "Earth": {"mass": 5.972e24, "radius": 6.371e6},
+    "Mars": {"mass": 6.417e23, "radius": 3.3895e6},
+    "Jupiter": {"mass": 1.898e27, "radius": 6.9911e7}
 }
 
-names, orbital_velocities, escape_velocities = [], [], []
+results = {}
 
-for name, props in bodies.items():
-    M, R = props['mass'], props['radius']
-    v_orbital = np.sqrt(G * M / R)
-    v_escape = np.sqrt(2 * G * M / R)
-    
-    names.append(name)
-    orbital_velocities.append(v_orbital / 1000)
-    escape_velocities.append(v_escape / 1000)
+for name, data in bodies.items():
+    M = data["mass"]
+    R = data["radius"]
+    v1 = np.sqrt(G * M / R)
+    v2 = np.sqrt(2) * v1
+    results[name] = {"v1": v1, "v2": v2}
 
-# Plot
-x = np.arange(len(names))
-width = 0.35
+v_sun = 29.78e3
+v2_earth = results["Earth"]["v2"]
+v3 = np.sqrt(v2_earth**2 + v_sun**2)
+results["Earth"]["v3"] = v3
 
-fig, ax = plt.subplots(figsize=(10, 6))
-ax.bar(x - width/2, orbital_velocities, width, label='Orbital Velocity (km/s)', color='skyblue')
-ax.bar(x + width/2, escape_velocities, width, label='Escape Velocity (km/s)', color='salmon')
+for name, vels in results.items():
+    print(f"{name}:")
+    for key, val in vels.items():
+        print(f"  {key}: {val/1000:.2f} km/s")
+```
+Earth:
+  v1: 7.91 km/s
+  v2: 11.19 km/s
+  v3: 31.81 km/s
+Mars:
+  v1: 3.55 km/s
+  v2: 5.03 km/s
+Jupiter:
+  v1: 42.57 km/s
+  v2: 60.20 km/s
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Cosmic velocity data (from previous calculations)
+results = {
+    "Earth": {"v1": 7910, "v2": 11180, "v3": 42150},
+    "Mars": {"v1": 3550, "v2": 5020},
+    "Jupiter": {"v1": 42040, "v2": 59450}
+}
+
+labels = list(results.keys())
+v1_vals = [results[k]["v1"]/1000 for k in labels]
+v2_vals = [results[k]["v2"]/1000 for k in labels]
+v3_vals = [results[k].get("v3", 0)/1000 for k in labels]
+
+x = np.arange(len(labels))
+width = 0.25
+
+fig, ax = plt.subplots(figsize=(10,6))
+rects1 = ax.bar(x - width, v1_vals, width, label='v1: Orbit')
+rects2 = ax.bar(x, v2_vals, width, label='v2: Escape')
+rects3 = ax.bar(x + width, v3_vals, width, label='v3: Leave System')
 
 ax.set_ylabel('Velocity (km/s)')
-ax.set_title('Orbital and Escape Velocities for Different Celestial Bodies')
+ax.set_title('Cosmic Velocities for Celestial Bodies')
 ax.set_xticks(x)
-ax.set_xticklabels(names)
+ax.set_xticklabels(labels)
 ax.legend()
 
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+```
+![alt text](image-4.png)
+---
 
-Importance in Space Exploration
+##  Visualization of Velocities
 
-Launching Satellites: Orbital velocity determines the minimal speed satellites must achieve to maintain a stable orbit.
+```python
+labels = list(results.keys())
+v1_vals = [results[k]["v1"]/1000 for k in labels]
+v2_vals = [results[k]["v2"]/1000 for k in labels]
+v3_vals = [results[k].get("v3", 0)/1000 for k in labels]
 
-Interplanetary Missions: Escape velocity guides spacecraft design, ensuring vehicles can exit Earth's gravitational field and travel to Mars, Jupiter, or beyond.
+x = np.arange(len(labels))
+width = 0.25
 
-Interstellar Travel: Understanding the third cosmic velocity is essential for missions intended to leave the solar system, such as Voyager 1 and 2.
+fig, ax = plt.subplots(figsize=(10,6))
+rects1 = ax.bar(x - width, v1_vals, width, label='v1: Orbit')
+rects2 = ax.bar(x, v2_vals, width, label='v2: Escape')
+rects3 = ax.bar(x + width, v3_vals, width, label='v3: Leave System')
 
-# Conclusion
+ax.set_ylabel('Velocity (km/s)')
+ax.set_title('Cosmic Velocities for Celestial Bodies')
+ax.set_xticks(x)
+ax.set_xticklabels(labels)
+ax.legend()
 
-Cosmic velocities significantly shape our approach to space exploration. Accurate knowledge and computational analysis of these velocities allow precise mission planning, facilitating humanity's exploration and potential colonization of other worlds.
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+```
+
+---
+
+##  Trajectory Simulation: Gravitational Escape Behavior
+
+![Trajectories from 800km altitude](../images/gravity_problem2_escape_trajectories.png)
+
+This plot shows the result of simulating multiple payloads launched from 800 km altitude with varying initial speeds (5 km/s to 13 km/s). It visually demonstrates:
+
+- Sub-orbital fall back  
+- Closed elliptical orbits  
+- Parabolic trajectory (near escape)  
+- Open hyperbolic escape paths  
+
+---
+
+##  Space Exploration Relevance
+
+- $v_1$: Low Earth orbit missions (e.g., satellites, ISS)  
+- $v_2$: Moon missions, Mars rovers, interplanetary probes  
+- $v_3$: Voyager missions, future interstellar missions  
+
+---
+
+##  Summary
+
+-  Derived $v_1 = \sqrt{\frac{G M}{r}}$
+-  Derived $v_2 = \sqrt{2 G M / r}$ from energy conservation
+-  Defined and visualized $v_3$ from planetary system escape
+-  Compared Earth, Mars, Jupiter using bar chart
+-  Verified with realistic trajectory graph from 800 km altitude
+- Related each velocity to mission types (LEO, interplanetary, interstellar)
+
+---
+
+## Colab Link
+
+[Colab - Gravity Problem 2 Simulation](https://colab.research.google.com/drive/10d4Z-XSnnEOpOTXa5mnBEaFii81fuTvj?usp=sharing)(https://colab.research.google.com/drive/1jfB5XwMR-niVb6iwQM4RxY5tDNKTG0mm?usp=sharing)

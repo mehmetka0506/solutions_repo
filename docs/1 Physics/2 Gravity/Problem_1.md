@@ -1,128 +1,145 @@
-# Orbital Period and Orbital Radius
+# Gravity Problem 1
 
-# Motivation
+## Orbital Period and Orbital Radius
 
-Kepler’s Third Law states that the square of the orbital period ($T^2$) of a planet is proportional to the cube of the orbital radius ($r^3$). This relationship is fundamental in celestial mechanics and plays a critical role in our understanding of gravitational forces and planetary motion.
+### Motivation
 
-Derivation of the Relationship
+The relationship between the square of the orbital period and the cube of the orbital radius, known as **Kepler's Third Law**, is a cornerstone of celestial mechanics.  
+This fundamental relationship enables us to determine planetary motions and understand gravitational interactions on both local and cosmic scales.
 
-For a body orbiting another significantly larger body in a circular orbit, gravitational force provides the required centripetal force:
+---
 
+## Derivation of Kepler's Third Law
 
+Consider a satellite or planet of mass $m$ orbiting a much larger central body of mass $M$ in a circular orbit.
 
-Simplifying by $m$:
+The gravitational force provides the necessary centripetal force:
 
+$$
+\frac{G M m}{r^2} = \frac{m v^2}{r}
+$$
 
+Canceling $m$ and simplifying:
 
-Thus, the orbital velocity $v$ is:
+$$
+v^2 = \frac{G M}{r}
+$$
 
+The orbital period $T$ is the time it takes to complete one full orbit:
 
+$$
+T = \frac{2 \pi r}{v}
+$$
 
-The orbital period $T$ (one full orbit) is distance divided by velocity:
+Substitute $v$ into the expression:
 
+$$
+T = 2 \pi r \sqrt{\frac{1}{G M}} \cdot \sqrt{r}
+= 2 \pi \sqrt{\frac{r^3}{G M}}
+$$
 
+Squaring both sides:
 
-Substituting the velocity expression:
+$$
+T^2 = \frac{4 \pi^2 r^3}{G M}
+$$
 
+This is the classical form of **Kepler’s Third Law**:
 
+$$
+T^2 \propto r^3
+$$
 
-Simplifying further:
+---
 
+## Verification Using Planetary Data
 
+We use data from the inner planets of the solar system: Mercury, Venus, Earth, and Mars.
 
-Squaring both sides gives Kepler’s third law explicitly:
-
-
-
-This shows clearly the proportionality $T^2 \propto r^3$.
-
-Implications for Astronomy
-
-This law is crucial because it allows astronomers to:
-
-Determine planetary masses: If orbital radius and period are known, the central body's mass can be calculated.
-
-Calculate distances: Observing the orbital period helps astronomers deduce distances between celestial bodies.
-
-For instance, by measuring the Moon’s orbital period around Earth and its orbital radius, Earth’s mass can be accurately determined.
-
-Real-world Examples
-
-Celestial Body
-
-Orbital Radius (m)
-
-Orbital Period (days)
-
-Moon around Earth
-
-$3.84 \times 10^8$
-
-$27.3$
-
-Earth around Sun
-
-$1.496 \times 10^{11}$
-
-$365.25$
-
-These observed values consistently validate Kepler's Third Law.
-
-Computational Model (Python Simulation)
-
-Here's a Python simulation verifying Kepler’s Third Law numerically, with graphical representations:
-
-import numpy as np
+```python
 import matplotlib.pyplot as plt
-![alt text](image.png)
+import numpy as np
+
 # Constants
-G = 6.67430e-11  # gravitational constant
-M_earth = 5.972e24  # Earth mass in kg
-r = 4.2e7  # Orbital radius in meters
+AU = 1.496e11  # Astronomical Unit in meters
+G = 6.67430e-11
+M_sun = 1.989e30
 
-# Orbital velocity and period
-v = np.sqrt(G * M_earth / r)
-T = 2 * np.pi * r / v
+# Orbital radii in AU and converted to meters
+radii_au = np.array([0.39, 0.72, 1.00, 1.52])
+radii_m = radii_au * AU
 
-# Time series data
-time = np.linspace(0, T, 1000)
-x = r * np.cos(2 * np.pi * time / T)
-vx = -v * np.sin(2 * np.pi * time / T)
+# Orbital periods in Earth days converted to seconds
+periods_days = np.array([88, 225, 365.25, 687])
+periods_sec = periods_days * 24 * 3600
 
-# Plotting both graphs in one figure
-plt.figure(figsize=(14, 6))
+# Compute T^2 and r^3
+T_squared = periods_sec ** 2
+r_cubed = radii_m ** 3
 
-# Time series (Position vs Time)
-plt.subplot(1, 2, 1)
-plt.plot(time, x / r, color='orange')
-plt.title('Time Series (X-Position vs Time)')
-plt.xlabel('Time (s)')
-plt.ylabel('X Position (normalized)')
+# Plot
+plt.figure(figsize=(8, 6))
+plt.plot(r_cubed, T_squared, 'o-', label='Planets')
+plt.xlabel('$r^3$ (m$^3$)')
+plt.ylabel('$T^2$ (s$^2$)')
+plt.title(\"Kepler's Third Law: $T^2$ vs $r^3$\")
 plt.grid(True)
-
-# Phase Portrait (Velocity vs Position)
-plt.subplot(1, 2, 2)
-plt.plot(x / r, vx / v, color='purple')
-plt.title('Phase Portrait (Velocity vs Position)')
-plt.xlabel('Position (normalized)')
-plt.ylabel('Velocity (normalized)')
-plt.grid(True)
-
-plt.suptitle('Orbital Motion Visualization')
+plt.legend()
 plt.tight_layout()
-plt.savefig('orbital_motion.png')
 plt.show()
+```
+![alt text](image-3.png)
+This plot should display a linear relationship, confirming the dependence:
 
-Run this code to generate and save the graph as orbital_motion.png. Ensure the image is located in your working directory.
+$$
+T^2 \propto r^3
+$$
 
-Extension to Elliptical Orbits
+---
 
-Kepler's third law also applies to elliptical orbits, using the semi-major axis $a$ instead of radius $r$:
+## Calculating the Mass of the Sun
 
+From the rearranged form of Kepler's Third Law:
 
+$$
+M = \frac{4 \pi^2 r^3}{G T^2}
+$$
 
-This generalized form allows for accurate predictions for real planetary systems, which typically have elliptical orbits.
+Using Earth's orbital parameters:
 
-# Conclusion
+- $r = 1.496 \times 10^{11} \ \text{m}$
+- $T = 365.25 \ \text{days} = 3.156 \times 10^7 \ \text{s}$
 
-Kepler’s Third Law provides astronomers with an essential tool for understanding celestial dynamics. Through both theoretical and computational analysis, we verify the profound connection between orbital radius and orbital period, critical in space exploration and astrophysics.
+Plug in values:
+
+$$
+M = \frac{4 \pi^2 (1.496 \times 10^{11})^3}{6.67430 \times 10^{-11} \cdot (3.156 \times 10^7)^2}
+\approx 1.989 \times 10^{30} \ \text{kg}
+$$
+
+This result matches the known mass of the Sun.
+
+---
+
+## Extension to Elliptical Orbits
+
+Kepler’s Third Law applies to elliptical orbits as well, where $r$ is replaced by the semi-major axis $a$:
+
+$$
+T^2 = \frac{4 \pi^2 a^3}{G M}
+$$
+
+---
+
+## Summary
+
+-  Derived $T^2 = \frac{4 \pi^2 r^3}{G M}$
+-  Verified $T^2 \propto r^3$ using Solar System data
+-  Estimated the mass of the Sun
+-  Generalized to elliptical orbits
+
+---
+
+## Colab Link
+
+[Colab - Gravity Problem 1 Simulation](https://colab.research.google.com/drive/1-7nMXrVfbv9v_kon4QK-mEdPspgIH0OS?usp=sharing)
