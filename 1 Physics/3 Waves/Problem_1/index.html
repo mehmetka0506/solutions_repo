@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>Waves Problem - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "Waves Problem";
         var mkdocs_page_input_path = "1 Physics/3 Waves/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -64,8 +64,28 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">3 Waves</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Waves Problem</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#interference-patterns-on-a-water-surface">Interference Patterns on a Water Surface</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#motivation">Motivation</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#task-description">Task Description</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-statement">Problem Statement</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#steps-to-follow">Steps to Follow</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#python-code">Python Code</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#observations">Observations</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#colab-link">Colab Link</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +183,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">3 Waves</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">Waves Problem</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,7 +191,109 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<h1 id="waves-problem">Waves Problem</h1>
+<h2 id="interference-patterns-on-a-water-surface">Interference Patterns on a Water Surface</h2>
+<h3 id="motivation">Motivation</h3>
+<p>Interference occurs when waves from different sources overlap, creating new patterns. On a water surface, this can be easily observed when ripples from different points meet, forming distinctive interference patterns. These patterns show how waves combine either constructively (amplifying) or destructively (canceling out).</p>
+<p>Studying these patterns helps us understand wave behavior in a visual and intuitive way. It introduces concepts like phase difference, wavelength, frequency, and superposition of waves.</p>
+<hr/>
+<h2 id="task-description">Task Description</h2>
+<p>A circular wave on the water surface, emanating from a point source at <span class="arithmatex">\((x_0, y_0)\)</span>, is described by the single disturbance equation:</p>
+<div class="arithmatex">\[
+\eta(x, y, t) = \frac{A}{\sqrt{r}} \cdot \cos(kr - \omega t + \phi)
+\]</div>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\(\eta(x, y, t)\)</span>: displacement at point <span class="arithmatex">\((x, y)\)</span> and time <span class="arithmatex">\(t\)</span> </li>
+<li><span class="arithmatex">\(A\)</span>: amplitude of the wave  </li>
+<li><span class="arithmatex">\(k = \frac{2\pi}{\lambda}\)</span>: wave number (related to wavelength <span class="arithmatex">\(\lambda\)</span>)  </li>
+<li><span class="arithmatex">\(\omega = 2\pi f\)</span>: angular frequency (related to frequency <span class="arithmatex">\(f\)</span>)  </li>
+<li><span class="arithmatex">\(r = \sqrt{(x - x_0)^2 + (y - y_0)^2}\)</span>: distance from source to point  </li>
+<li><span class="arithmatex">\(\phi\)</span>: initial phase</li>
+</ul>
+<hr/>
+<h2 id="problem-statement">Problem Statement</h2>
+<p>Your task is to analyze the interference patterns formed on the water surface due to the superposition of waves emitted from point sources placed at the vertices of a chosen regular polygon.</p>
+<hr/>
+<h3 id="steps-to-follow">Steps to Follow</h3>
+<ol>
+<li><strong>Choose a Regular Polygon</strong> (e.g., triangle, square, pentagon)  </li>
+<li><strong>Place Sources</strong> at the vertices  </li>
+<li><strong>Apply the wave equation</strong> for each source  </li>
+<li><strong>Superposition</strong>:</li>
+</ol>
+<p>$$
+   \eta_{\text{sum}}(x, y, t) = \sum_{i=1}^{N} \eta_i(x, y, t)
+   $$</p>
+<ol>
+<li><strong>Visualize</strong> both 2D (heatmap) and 3D surface plots of <span class="arithmatex">\(\eta_{\text{sum}}(x, y, t)\)</span> </li>
+<li><strong>Analyze</strong> zones of constructive/destructive interference</li>
+</ol>
+<hr/>
+<h2 id="python-code">Python Code</h2>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+# Parameters
+A = 1
+wavelength = 1.0
+k = 2 * np.pi / wavelength
+f = 1
+omega = 2 * np.pi * f
+phi = 0
+
+# Create regular polygon (e.g., pentagon)
+N = 5
+R = 5
+angles = np.linspace(0, 2*np.pi, N, endpoint=False)
+sources = [(R*np.cos(a), R*np.sin(a)) for a in angles]
+
+# Grid
+x = np.linspace(-10, 10, 400)
+y = np.linspace(-10, 10, 400)
+X, Y = np.meshgrid(x, y)
+
+# Time snapshot
+t = 0
+eta_total = np.zeros_like(X)
+
+# Superpose waves
+for (x0, y0) in sources:
+    r = np.sqrt((X - x0)**2 + (Y - y0)**2) + 1e-6
+    eta = A / np.sqrt(r) * np.cos(k * r - omega * t + phi)
+    eta_total += eta
+
+# 2D Heatmap
+plt.figure(figsize=(8,6))
+plt.contourf(X, Y, eta_total, levels=100, cmap='coolwarm')
+plt.colorbar(label='Displacement')
+plt.title('2D Interference Pattern (Pentagon)')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+# 3D Surface Plot
+fig = plt.figure(figsize=(10, 7))
+ax = fig.add_subplot(111, projection='3d')
+ax.plot_surface(X, Y, eta_total, cmap='viridis', edgecolor='none', alpha=0.85)
+ax.set_title('3D Surface Plot of Wave Interference')
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('Displacement')
+plt.tight_layout()
+plt.show()
+</code></pre>
+<p><img alt="alt text" src="../image.png"/>
+<img alt="alt text" src="../image-1.png"/></p>
+<h2 id="observations">Observations</h2>
+<p>Areas where waves amplify each other show constructive interference.</p>
+<p>Areas where waves cancel each other show destructive interference.</p>
+<p>Symmetry of the polygon affects the symmetry of the interference pattern.</p>
+<h2 id="colab-link">Colab Link</h2>
+<p>Colab – <a href="https://colab.research.google.com/drive/1UnVcdo-jVKDDhnNkeHCr0dmhppP3l8BJ?usp=sharing">Waves Simulation</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
