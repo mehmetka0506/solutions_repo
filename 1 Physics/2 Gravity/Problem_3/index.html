@@ -302,44 +302,43 @@ HTML(ani.to_jshtml())
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 
-# Constants
-G = 6.67430e-11
-M = 5.972e24
-R_earth = 6.371e6
-altitude = 800e3
-r0 = R_earth + altitude
+G = 6.67430e-11         # Universal gravitational constant (m^3 kg^-1 s^-2)
+M_sun = 1.989e30        # Mass of the Sun (kg)
+R_sun = 6.9634e8        # Radius of the Sun (m)
+AU = 1.496e11           # 1 Astronomical Unit in meters
 
-# Equations of motion
+r0 = AU  # Starting position 1 AU from the Sun
+
 def motion(t, y):
     x, y_pos, vx, vy = y
     r = np.sqrt(x**2 + y_pos**2)
-    ax = -G * M * x / r**3
-    ay = -G * M * y_pos / r**3
+    ax = -G * M_sun * x / r**3
+    ay = -G * M_sun * y_pos / r**3
     return [vx, vy, ax, ay]
 
-# Initial velocities from 5 to 13 km/s
-velocities = np.arange(5e3, 13.5e3, 0.5e3)
+velocities = np.arange(25e3, 52e3, 5e3)  # In m/s
 
 plt.figure(figsize=(10, 10))
 
 for v in velocities:
-    y0 = [0, r0, v, 0]  # Initial pos above Earth, velocity in +x direction
-    sol = solve_ivp(motion, [0, 6000], y0, max_step=5)
-    plt.plot(sol.y[0]/1e6, sol.y[1]/1e6, label=f'{v/1e3:.1f} km/s')
+    y0 = [r0, 0, 0, v]  # Initial pos at 1 AU on x-axis, velocity in +y direction
+    sol = solve_ivp(motion, [0, 3.154e7], y0, max_step=1000)  # 1 year
+    plt.plot(sol.y[0]/AU, sol.y[1]/AU, label=f'{v/1e3:.0f} km/s')
 
-# Plot Earth
-earth = plt.Circle((0, 0), R_earth/1e6, color='blue', alpha=0.3)
-plt.gca().add_artist(earth)
+sun = plt.Circle((0, 0), R_sun / AU, color='orange', alpha=0.5)
+plt.gca().add_artist(sun)
 
-plt.title("Payload Trajectories from 800 km Altitude")
-plt.xlabel("X Position (1000 km)")
-plt.ylabel("Y Position (1000 km)")
+plt.title("Payload Trajectories from 1 AU (Sun-Centered)")
+plt.xlabel("X Position (AU)")
+plt.ylabel("Y Position (AU)")
 plt.grid(True)
 plt.axis('equal')
-plt.legend()
+plt.legend(title="Initial Velocity")
+plt.tight_layout()
 plt.show()
+
 </code></pre>
-<h2 id="_1"><img alt="alt text" src="../image-5.png"/></h2>
+<h2 id="_1"><img alt="alt text" src="../image-9.png"/></h2>
 <h2 id="output-plot-observations">Output Plot &amp; Observations</h2>
 <p>This plot clearly shows:</p>
 <ul>

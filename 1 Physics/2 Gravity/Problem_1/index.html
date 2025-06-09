@@ -228,35 +228,33 @@ T^2 \propto r^3
 <pre><code class="language-python">import matplotlib.pyplot as plt
 import numpy as np
 
-# Constants
-AU = 1.496e11  # Astronomical Unit in meters
+AU = 1.496e11  
 G = 6.67430e-11
 M_sun = 1.989e30
 
-# Orbital radii in AU and converted to meters
+planet_names = ['Mercury', 'Venus', 'Earth', 'Mars']
 radii_au = np.array([0.39, 0.72, 1.00, 1.52])
 radii_m = radii_au * AU
-
-# Orbital periods in Earth days converted to seconds
 periods_days = np.array([88, 225, 365.25, 687])
 periods_sec = periods_days * 24 * 3600
-
-# Compute T^2 and r^3
 T_squared = periods_sec ** 2
 r_cubed = radii_m ** 3
 
-# Plot
 plt.figure(figsize=(8, 6))
-plt.plot(r_cubed, T_squared, 'o-', label='Planets')
-plt.xlabel('$r^3$ (m$^3$)')
-plt.ylabel('$T^2$ (s$^2$)')
-plt.title(\"Kepler's Third Law: $T^2$ vs $r^3$\")
+plt.plot(r_cubed, T_squared, 'o', label='Planets')
+
+# Label each point
+for i, name in enumerate(planet_names):
+    plt.text(r_cubed[i] * 1.01, T_squared[i] * 1.01, name)
+
+plt.xlabel('$r^3$ (m$^3$)', fontsize=12)
+plt.ylabel('$T^2$ (s$^2$)', fontsize=12)
+plt.title("Kepler's Third Law: $T^2$ vs $r^3$", fontsize=14)
 plt.grid(True)
-plt.legend()
 plt.tight_layout()
 plt.show()
 </code></pre>
-<p><img alt="alt text" src="../image-3.png"/>
+<p><img alt="alt text" src="../image-8.png"/>
 This plot should display a linear relationship, confirming the dependence:</p>
 <div class="arithmatex">\[
 T^2 \propto r^3
@@ -294,7 +292,7 @@ T^2 = \frac{4 \pi^2 a^3}{G M}
 </ul>
 <hr/>
 <h2 id="colab-link">Colab Link</h2>
-<p><a href="https://colab.research.google.com/drive/1-7nMXrVfbv9v_kon4QK-mEdPspgIH0OS?usp=sharing">Colab - Gravity Problem 1 Simulation</a></p>
+<p><a href="https://colab.research.google.com/drive/1zz4iYSjHKqRyrk7L_KBuojCUnXdlOIJJ?usp=sharing">Colab - Gravity Problem 1 Simulation</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
