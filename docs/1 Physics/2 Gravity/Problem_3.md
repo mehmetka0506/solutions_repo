@@ -111,7 +111,8 @@ ani = animation.FuncAnimation(fig, update, frames=400, init_func=init, blit=True
 
 HTML(ani.to_jshtml())
 ```
-
+![alt text](image-6.png)
+![alt text](image-7.png)
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
