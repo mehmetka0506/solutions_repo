@@ -164,7 +164,8 @@ ani = animation.FuncAnimation(fig, update, frames=np.linspace(0, 2*np.pi, 60), i
 gif_path = "/content/wave_interference_pentagon.gif"
 ani.save(gif_path, writer='pillow', fps=10)
 
-gif_path
+from IPython.display import Image
+Image(filename=gif_path)
 ```
 ![alt text](<wave_interference_pentagon (1).gif>)
 Colab - [Animation](https://colab.research.google.com/drive/1350Ts3XC-3kRtY9tPQg-F_WngsCFbwdo?usp=sharing)
