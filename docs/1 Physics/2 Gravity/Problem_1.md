@@ -72,8 +72,14 @@ periods_sec = periods_days * 24 * 3600
 T_squared = periods_sec ** 2
 r_cubed = radii_m ** 3
 
+# Theoretical Kepler's Third Law line: T^2 = (4π² / GM) * r^3
+kepler_constant = (4 * np.pi ** 2) / (G * M_sun)
+r_range = np.linspace(min(r_cubed), max(r_cubed), 100)
+T_squared_theoretical = kepler_constant * r_range
+
 plt.figure(figsize=(8, 6))
 plt.plot(r_cubed, T_squared, 'o', label='Planets')
+plt.plot(r_range, T_squared_theoretical, '-', label="Kepler's Law", linewidth=2)
 
 # Label each point
 for i, name in enumerate(planet_names):
@@ -83,10 +89,12 @@ plt.xlabel('$r^3$ (m$^3$)', fontsize=12)
 plt.ylabel('$T^2$ (s$^2$)', fontsize=12)
 plt.title("Kepler's Third Law: $T^2$ vs $r^3$", fontsize=14)
 plt.grid(True)
+plt.legend()
 plt.tight_layout()
 plt.show()
+
 ```
-![alt text](image-8.png)
+![alt text](image-10.png)
 This plot should display a linear relationship, confirming the dependence:
 
 $$
