@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>Electromagnetism Problem 1 - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "Electromagnetism Problem 1";
         var mkdocs_page_input_path = "1 Physics/4 Electromagnetism/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -70,8 +70,30 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">4 Electromagnetism</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Electromagnetism Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#lorentz-force-simulating-the-motion-of-charged-particles">Lorentz Force: Simulating the Motion of Charged Particles</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#motivation">Motivation</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#constants-and-setup">Constants and Setup</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#equations-of-motion">Equations of Motion</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#python-simulation-code">Python Simulation Code</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_1"></a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#visualized-results">Visualized Results</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#real-world-applications">Real-World Applications</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#extension-ideas">Extension Ideas</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#colab-link">Colab Link</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +185,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">4 Electromagnetism</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">Electromagnetism Problem 1</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,7 +193,130 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<h1 id="electromagnetism-problem-1">Electromagnetism Problem 1</h1>
+<h2 id="lorentz-force-simulating-the-motion-of-charged-particles">Lorentz Force: Simulating the Motion of Charged Particles</h2>
+<hr/>
+<h3 id="motivation">Motivation</h3>
+<p>The Lorentz force, given by:</p>
+<div class="arithmatex">\[
+\vec{F} = q\vec{E} + q\vec{v} \times \vec{B}
+\]</div>
+<p>governs the motion of charged particles in electric and magnetic fields. It plays a crucial role in fields like plasma physics, astrophysics, mass spectrometry, and particle accelerators. In this problem, we focus on visualizing circular, spiral, and drift trajectories.</p>
+<hr/>
+<h2 id="constants-and-setup">Constants and Setup</h2>
+<p>We use the following constants for all scenarios:</p>
+<ul>
+<li>Charge: <span class="arithmatex">\(q = 1\)</span> C</li>
+<li>Mass: <span class="arithmatex">\(m = 1\)</span> g = 0.001 kg</li>
+<li>Magnetic Field: <span class="arithmatex">\(\vec{B} = [0, 0, 1]\)</span> T</li>
+<li>Electric Field (if used): <span class="arithmatex">\(\vec{E} = [0, 5, 0]\)</span> V/m</li>
+</ul>
+<hr/>
+<h2 id="equations-of-motion">Equations of Motion</h2>
+<p>Using Newton's Second Law and the Lorentz force:</p>
+<div class="arithmatex">\[
+\frac{d\vec{v}}{dt} = \frac{q}{m}(\vec{E} + \vec{v} \times \vec{B})
+\]</div>
+<p>We numerically integrate this using <code>solve_ivp</code>.</p>
+<hr/>
+<h2 id="python-simulation-code">Python Simulation Code</h2>
+<pre><code class="language-python">import numpy as np 
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+from mpl_toolkits.mplot3d import Axes3D
+
+# Constants
+q = 1       # Charge in Coulombs
+m = 1       # Mass in kilograms (1 kg)
+B = np.array([0, 0, 1])  # Magnetic field in z-direction
+E = np.array([0, 5, 0])  # Electric field in y-direction
+
+# Lorentz force system
+def lorentz(t, y, use_electric=False):
+    r = y[:3]
+    v = y[3:]
+    E_field = E if use_electric else np.array([0, 0, 0])
+    a = (q / m) * (E_field + np.cross(v, B))
+    return np.concatenate((v, a))
+
+# Time settings
+dt = 1e-3
+n_steps = 5000
+T = dt * n_steps
+t_eval = np.linspace(0, T, n_steps)
+
+# Define all 3 scenarios
+configs = [
+    {
+        "label": "Circular Trajectory in Magnetic Field",
+        "y0": [0, 0, 0, 10, 0, 0],  # Initial velocity in X
+        "use_electric": False
+    },
+    {
+        "label": "Spiral Trajectory (Z motion)",
+        "y0": [0, 0, 0, 10, 0, 2],  # Initial velocity in X and Z
+        "use_electric": False
+    },
+    {
+        "label": "E × B Drift",
+        "y0": [0, 0, 0, 10, 0, 0],  # Initial velocity in X, electric field active
+        "use_electric": True
+    }
+]
+
+# Plotting
+fig = plt.figure(figsize=(18, 5))
+
+for i, config in enumerate(configs):
+    sol = solve_ivp(
+        lorentz,
+        [0, T],
+        config["y0"],
+        args=(config["use_electric"],),
+        t_eval=t_eval
+    )
+    x, y, z = sol.y[0], sol.y[1], sol.y[2]
+
+    ax = fig.add_subplot(1, 3, i+1, projection='3d')
+    ax.plot(x, y, z, color='deepskyblue', lw=1.5)
+    ax.set_title(config["label"], fontsize=11)
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+    ax.tick_params(labelsize=8)
+    ax.set_xlim([min(x), max(x)])
+    ax.set_ylim([min(y), max(y)])
+    ax.set_zlim([min(z), max(z)])
+    ax.grid(True)
+
+plt.tight_layout()
+plt.show()
+</code></pre>
+<h2 id="_1"><img alt="alt text" src="../image.png"/></h2>
+<h2 id="visualized-results">Visualized Results</h2>
+<ul>
+<li><strong>Circular motion</strong>: Pure rotation in XY-plane under magnetic field only.</li>
+<li><strong>Spiral motion</strong>: Z-velocity added causes a spiral up.</li>
+<li><strong>Drift motion</strong>: Crossed E and B fields result in sideways drift.</li>
+</ul>
+<p>Each trajectory exhibits expected motion per Lorentz force dynamics.</p>
+<hr/>
+<h2 id="real-world-applications">Real-World Applications</h2>
+<ul>
+<li><strong>Cyclotron</strong>: Particles spiral in a magnetic field.</li>
+<li><strong>Plasma confinement</strong>: Drift motion used in tokamaks.</li>
+<li><strong>Mass spectrometry</strong>: Circular/spiral paths reveal charge-to-mass ratio.</li>
+</ul>
+<hr/>
+<h2 id="extension-ideas">Extension Ideas</h2>
+<ul>
+<li>Add time-varying fields.</li>
+<li>Use non-uniform magnetic field.</li>
+<li>Animate the particle motion.</li>
+</ul>
+<hr/>
+<h2 id="colab-link">Colab Link</h2>
+<p><a href="https://colab.research.google.com/drive/1NZtXd8Iobkp-_3Ri1UqibfsM6MZX0Zrr?usp=sharing">Colab Notebook - Lorentz Force Simulation</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
