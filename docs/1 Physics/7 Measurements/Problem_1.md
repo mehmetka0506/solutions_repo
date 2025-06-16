@@ -42,6 +42,7 @@ Time measured for **10 oscillations**, repeated **10 times**:
 ---
 
 ###  Statistics
+- **Mean time for 10 oscillations (𝑇̅₁₀):**  
 $$
 \bar{T}_{10} = \frac{\sum T_{10}}{10} = \frac{180.5}{10} = 18.05\, \mathrm{s}
 $$
@@ -53,11 +54,6 @@ $$
 $$
 \Delta T_{10} = \frac{\sigma_T}{\sqrt{n}} = \frac{0.16}{\sqrt{10}} \approx 0.05\, \mathrm{s}
 $$
-
-- **Mean time for 10 oscillations (𝑇̅₁₀):**  
-  $$
-  \bar{T}_{10} = \frac{\sum T_{10}}{10} = \frac{180.5}{10} = 18.05 \, \text{s}
-  $$
 
 - **Standard deviation (σₜ):**  
   $$
