@@ -1,4 +1,4 @@
-# 🧪 Measurements Problem 1
+#  Measurements Problem 1
 
 ##  Measuring Earth's Gravitational Acceleration with a Pendulum
 
@@ -42,6 +42,17 @@ Time measured for **10 oscillations**, repeated **10 times**:
 ---
 
 ###  Statistics
+$$
+\bar{T}_{10} = \frac{\sum T_{10}}{10} = \frac{180.5}{10} = 18.05\, \mathrm{s}
+$$
+
+$$
+\sigma_T \approx 0.16\, \mathrm{s}
+$$
+
+$$
+\Delta T_{10} = \frac{\sigma_T}{\sqrt{n}} = \frac{0.16}{\sqrt{10}} \approx 0.05\, \mathrm{s}
+$$
 
 - **Mean time for 10 oscillations (𝑇̅₁₀):**  
   $$
