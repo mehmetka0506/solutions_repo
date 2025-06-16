@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>🧪 Measurements Problem 1 - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "\ud83e\uddea Measurements Problem 1";
         var mkdocs_page_input_path = "1 Physics/7 Measurements/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -90,8 +90,50 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">7 Measurements</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">🧪 Measurements Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#measuring-earths-gravitational-acceleration-with-a-pendulum">Measuring Earth's Gravitational Acceleration with a Pendulum</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#motivation">Motivation</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#experimental-setup">Experimental Setup</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#raw-time-data-t10">Raw Time Data (T₁₀)</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#statistics">Statistics</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#calculations">Calculations</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#calculate-the-period-t-and-its-uncertainty">Calculate the period (T) and its uncertainty</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#compute-gravitational-acceleration">Compute gravitational acceleration</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#uncertainty-in-g">Uncertainty in g</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#discussion">Discussion</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#effect-of-measurement-resolution-on-l">Effect of measurement resolution on ΔL</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#timing-variability-and-its-impact-on-t">Timing variability and its impact on ΔT</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations-and-assumptions">Limitations and Assumptions</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#final-result-summary">Final Result Summary</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#plot">Plot</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#colab-link-if-applicable">Colab Link (if applicable)</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +205,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">7 Measurements</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">🧪 Measurements Problem 1</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,7 +213,228 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<h1 id="measurements-problem-1">🧪 Measurements Problem 1</h1>
+<h2 id="measuring-earths-gravitational-acceleration-with-a-pendulum">Measuring Earth's Gravitational Acceleration with a Pendulum</h2>
+<hr/>
+<h3 id="motivation">Motivation</h3>
+<p>The acceleration due to gravity, <strong>g</strong>, is a fundamental constant that influences various physical phenomena. Accurately measuring <strong>g</strong> is crucial in fields such as engineering, physics, and astronomy.</p>
+<p>One classical approach to measure <strong>g</strong> is using a <strong>simple pendulum</strong>, where the period of oscillation is dependent on the local gravitational field. This experiment emphasizes rigorous measurement practices, error analysis, and data interpretation.</p>
+<hr/>
+<h2 id="experimental-setup">Experimental Setup</h2>
+<ul>
+<li><strong>String length (L):</strong> 140 cm = <strong>1.400 m</strong></li>
+<li><strong>Uncertainty in length (ΔL):</strong> ±0.5 cm = <strong>0.005 m</strong></li>
+<li><strong>Weight:</strong> set of keys</li>
+<li><strong>Displacement angle:</strong> &lt;15°</li>
+<li><strong>Measurement tool:</strong> phone stopwatch</li>
+</ul>
+<hr/>
+<h2 id="raw-time-data-t10">Raw Time Data (T₁₀)</h2>
+<p>Time measured for <strong>10 oscillations</strong>, repeated <strong>10 times</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Trial</th>
+<th>T₁₀ (s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>18.0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>18.2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>18.1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>17.9</td>
+</tr>
+<tr>
+<td>5</td>
+<td>18.2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>17.8</td>
+</tr>
+<tr>
+<td>7</td>
+<td>18.0</td>
+</tr>
+<tr>
+<td>8</td>
+<td>18.1</td>
+</tr>
+<tr>
+<td>9</td>
+<td>18.3</td>
+</tr>
+<tr>
+<td>10</td>
+<td>17.9</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h3 id="statistics">Statistics</h3>
+<ul>
+<li>
+<p><strong>Mean time for 10 oscillations (𝑇̅₁₀):</strong><br/>
+  $$
+  \bar{T}<em>{10} = \frac{\sum T</em>{10}}{10} = \frac{180.5}{10} = 18.05 \, \text{s}
+  $$</p>
+</li>
+<li>
+<p><strong>Standard deviation (σₜ):</strong><br/>
+  $$
+  \sigma_T \approx 0.16 \, \text{s}
+  $$</p>
+</li>
+<li>
+<p><strong>Uncertainty in T₁₀ (ΔT₁₀):</strong><br/>
+  $$
+  \Delta T_{10} = \frac{\sigma_T}{\sqrt{n}} = \frac{0.16}{\sqrt{10}} \approx 0.05 \, \text{s}
+  $$</p>
+</li>
+</ul>
+<hr/>
+<h2 id="calculations">Calculations</h2>
+<h3 id="calculate-the-period-t-and-its-uncertainty">Calculate the period (T) and its uncertainty</h3>
+<ul>
+<li><span class="arithmatex">\(T = \frac{\bar{T}_{10}}{10} = \frac{18.05}{10} = 1.805 \, \text{s}\)</span></li>
+<li><span class="arithmatex">\(\Delta T = \frac{\Delta T_{10}}{10} = \frac{0.05}{10} = 0.005 \, \text{s}\)</span></li>
+</ul>
+<hr/>
+<h3 id="compute-gravitational-acceleration">Compute gravitational acceleration</h3>
+<p>Using the formula:<br/>
+$$
+g = \frac{4\pi^2 L}{T^2}
+$$</p>
+<div class="arithmatex">\[
+g = \frac{4\pi^2 \cdot 1.400}{(1.805)^2} = \frac{55.4177}{3.26} \approx 17.0 \, \text{m/s}^2
+\]</div>
+<p>This result is significantly high; we will analyze it in the discussion section.</p>
+<hr/>
+<h3 id="uncertainty-in-g">Uncertainty in g</h3>
+<p>Using propagation of uncertainties:</p>
+<div class="arithmatex">\[
+\Delta g = g \cdot \sqrt{\left( \frac{\Delta L}{L} \right)^2 + \left( 2 \cdot \frac{\Delta T}{T} \right)^2}
+\]</div>
+<p>Substituting:</p>
+<div class="arithmatex">\[
+\Delta g = 17.0 \cdot \sqrt{ \left( \frac{0.005}{1.400} \right)^2 + \left( 2 \cdot \frac{0.005}{1.805} \right)^2 } \approx 0.11 \, \text{m/s}^2
+\]</div>
+<p>So final result:</p>
+<blockquote>
+<p><strong>g = 17.0 ± 0.11 m/s²</strong></p>
+</blockquote>
+<hr/>
+<h2 id="discussion">Discussion</h2>
+<h3 id="effect-of-measurement-resolution-on-l">Effect of measurement resolution on ΔL</h3>
+<ul>
+<li>Measuring <strong>L</strong> with ±0.5 cm introduces <strong>0.36%</strong> relative error.</li>
+<li>Longer pendulums reduce percentage error in ΔL.</li>
+</ul>
+<h3 id="timing-variability-and-its-impact-on-t">Timing variability and its impact on ΔT</h3>
+<ul>
+<li>The phone stopwatch introduces human reaction time errors (~0.2s), but averaging 10 trials mitigates this.</li>
+<li>Observed σₜ = 0.16 s is within expected bounds.</li>
+</ul>
+<h3 id="limitations-and-assumptions">Limitations and Assumptions</h3>
+<ul>
+<li>Air resistance and friction ignored.</li>
+<li>Angle &lt;15° assumed for simple harmonic motion approximation.</li>
+<li>Center of mass estimation for keys might not be exact.</li>
+<li>Timing error (start/stop delay) is a significant factor.</li>
+</ul>
+<hr/>
+<h2 id="final-result-summary">Final Result Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Quantity</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Length (L)</td>
+<td>1.400 m</td>
+</tr>
+<tr>
+<td>ΔL</td>
+<td>0.005 m</td>
+</tr>
+<tr>
+<td>T̅₁₀</td>
+<td>18.05 s</td>
+</tr>
+<tr>
+<td>σₜ</td>
+<td>0.16 s</td>
+</tr>
+<tr>
+<td>ΔT₁₀</td>
+<td>0.05 s</td>
+</tr>
+<tr>
+<td>T</td>
+<td>1.805 s</td>
+</tr>
+<tr>
+<td>ΔT</td>
+<td>0.005 s</td>
+</tr>
+<tr>
+<td>g</td>
+<td><strong>17.0 m/s²</strong></td>
+</tr>
+<tr>
+<td>Δg</td>
+<td><strong>0.11 m/s²</strong></td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="plot">Plot</h2>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Time measurements for 10 oscillations (in seconds)
+times = np.array([18.0, 18.2, 18.1, 17.9, 18.2, 17.8, 18.0, 18.1, 18.3, 17.9])
+mean_T10 = np.mean(times)
+std_T10 = np.std(times, ddof=1)
+
+# Line plot of the time measurements
+plt.figure(figsize=(8, 5))
+plt.plot(range(1, 11), times, marker='o', linestyle='-', color='teal', label='T₁₀ Measurements')
+plt.axhline(mean_T10, color='orange', linestyle='--', label=f'Mean = {mean_T10:.2f}s')
+plt.fill_between(range(1, 11), mean_T10 - std_T10, mean_T10 + std_T10, color='orange', alpha=0.2, label='±1σ range')
+
+plt.title("Time for 10 Oscillations (T₁₀) - Pendulum Experiment")
+plt.xlabel("Trial")
+plt.ylabel("Time (seconds)")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
+</code></pre>
+<p><img alt="alt text" src="../image.png"/></p>
+<h2 id="conclusion">Conclusion</h2>
+<ul>
+<li>Our measured <strong>g = 17.0 ± 0.11 m/s²</strong> deviates from the standard <strong>9.81 m/s²</strong>.</li>
+<li>Likely causes: misidentified center of mass, timing inaccuracy, or unsteady swing path.</li>
+<li>Despite deviation, experiment demonstrates key concepts of error propagation, averaging, and physical modeling.</li>
+</ul>
+<hr/>
+<h2 id="colab-link-if-applicable">Colab Link (if applicable)</h2>
+<p><a href="https://colab.research.google.com/drive/1GEhhLg3ummHP73RT_Ype7m04j2A7WlkM?usp=sharing">Colab Notebook – Pendulum g Measurement</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
