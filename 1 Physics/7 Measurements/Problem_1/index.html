@@ -132,6 +132,8 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#animation">Animation</a>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#colab-link-if-applicable">Colab Link (if applicable)</a>
 </li>
 </ul>
@@ -439,6 +441,61 @@ plt.show()
 <li>Despite deviation, experiment demonstrates key concepts of error propagation, averaging, and physical modeling.</li>
 </ul>
 <hr/>
+<h2 id="animation">Animation</h2>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Circle
+from PIL import Image
+import os
+
+# Ayarlar
+length = 1.4  # metre
+g = 9.81  # m/s^2
+T = 2 * np.pi * np.sqrt(length / g)  # Periyot
+frames_per_cycle = 20
+num_cycles = 3
+total_frames = frames_per_cycle * num_cycles
+theta_max = np.radians(20)  # maksimum salınım açısı (derece → radyan)
+
+# GIF dosyası için klasör
+os.makedirs("frames", exist_ok=True)
+
+# Her kare için görüntü oluştur
+images = []
+for i in range(total_frames):
+    t = i / frames_per_cycle * T
+    theta = theta_max * np.cos(2 * np.pi * t / T)
+
+    # Bob koordinatları
+    x = length * np.sin(theta)
+    y = -length * np.cos(theta)
+
+    fig, ax = plt.subplots(figsize=(4, 4))
+    ax.plot([0, x], [0, y], 'k-', lw=2)  # ip
+    bob = Circle((x, y), 0.05, fc='orange', ec='black')
+    ax.add_patch(bob)
+
+    ax.set_xlim(-1.6, 1.6)
+    ax.set_ylim(-1.6, 0.2)
+    ax.set_aspect('equal')
+    ax.axis('off')
+    plt.text(-1.5, 0.1, 'Length = 1.40 m\n10 swings = 18 s', fontsize=12)
+
+    frame_path = f"frames/frame_{i:03d}.png"
+    plt.savefig(frame_path, dpi=100)
+    plt.close()
+    images.append(Image.open(frame_path))
+
+# GIF oluştur
+gif_path = "pendulum.gif"
+images[0].save(gif_path, save_all=True, append_images=images[1:], duration=100, loop=0)
+
+# Google Colab'da görüntüle
+from IPython.display import Image as IPImage
+IPImage(filename=gif_path)
+</code></pre>
+<p><img alt="alt text" src="../image-1.png"/>
+<a href="https://colab.research.google.com/drive/1wkFwc-eaMsBnAOwcHkvCcEjHQi_VOJaX?usp=sharing">Colab Animation</a></p>
 <h2 id="colab-link-if-applicable">Colab Link (if applicable)</h2>
 <p><a href="https://colab.research.google.com/drive/1GEhhLg3ummHP73RT_Ype7m04j2A7WlkM?usp=sharing">Colab Notebook – Pendulum g Measurement</a></p>
 </div>
