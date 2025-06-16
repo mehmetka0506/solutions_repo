@@ -1,41 +1,49 @@
-# Electromagnetism Problem 1
-
+## Electromagnetism Problem 1  
 ## Lorentz Force: Simulating the Motion of Charged Particles
 
 ---
 
-### Motivation
+## Motivation
 
-The Lorentz force, given by:
+The **Lorentz force**, given by the equation:
 
 $$
 \vec{F} = q\vec{E} + q\vec{v} \times \vec{B}
 $$
 
-governs the motion of charged particles in electric and magnetic fields. It plays a crucial role in fields like plasma physics, astrophysics, mass spectrometry, and particle accelerators. In this problem, we focus on visualizing circular, spiral, and drift trajectories.
+governs the motion of charged particles in electric and magnetic fields. This law is essential in understanding how charged particles behave in contexts such as:
+
+- Plasma physics  
+- Particle accelerators  
+- Magnetic traps  
+- Mass spectrometers  
+
+In this simulation, we **use a body with** `q = 1 C` and `m = 1 gram = 0.001 kg` ( not an electron!) as instructed, and analyze its behavior in:
+
+- Circular motion (magnetic field only)  
+- Spiral motion (with velocity in the Z-direction)  
+- Drift motion (crossed electric and magnetic fields)
 
 ---
 
-## Constants and Setup
+##  Constants and Setup
 
-We use the following constants for all scenarios:
-
-- Charge: $q = 1$ C
-- Mass: $m = 1$ g = 0.001 kg
-- Magnetic Field: $\vec{B} = [0, 0, 1]$ T
-- Electric Field (if used): $\vec{E} = [0, 5, 0]$ V/m
+- Charge: `q = 1` C  
+- Mass: `m = 0.001` kg  
+- Magnetic Field: **B = [0, 0, 1]** T  
+- Electric Field: **E = [0, 5, 0]** V/m (only for drift scenario)
 
 ---
 
-## Equations of Motion
+###  Equations of Motion
 
-Using Newton's Second Law and the Lorentz force:
+Using Newton’s Second Law:
 
 $$
 \frac{d\vec{v}}{dt} = \frac{q}{m}(\vec{E} + \vec{v} \times \vec{B})
 $$
 
-We numerically integrate this using `solve_ivp`.
+Numerical integration will be done using `solve_ivp` from SciPy.
 
 ---
 
