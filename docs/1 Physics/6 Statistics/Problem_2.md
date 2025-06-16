@@ -165,6 +165,87 @@ else:
 ```
 ![alt text](image-7.png)
 [Colab](https://colab.research.google.com/drive/1rfh9ZDpudMXHFwhg35HDeX2MsgLWHjk2?usp=sharing)
+
+### Buffon Needle Plot
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Set seeds for reproducibility
+np.random.seed(0)
+
+# Simulation sizes (log spaced for better convergence view)
+N_values = np.logspace(2, 5, 30, dtype=int)
+true_pi = np.pi
+
+# Buffon's Needle parameters
+L = 1.0  # Needle length
+t = 2.0  # Distance between lines
+
+# Results storage
+pi_buffon_estimates = []
+pi_circle_estimates = []
+buffon_errors = []
+circle_errors = []
+
+for N in N_values:
+    # -------- Circle Monte Carlo --------
+    x = np.random.uniform(-1, 1, N)
+    y = np.random.uniform(-1, 1, N)
+    inside = (x**2 + y**2) <= 1
+    pi_est_circle = 4 * np.sum(inside) / N
+    pi_circle_estimates.append(pi_est_circle)
+    circle_errors.append(abs(true_pi - pi_est_circle))
+
+    # -------- Buffon's Needle --------
+    crossings = 0
+    for _ in range(N):
+        center = np.random.uniform(0, t / 2)
+        angle = np.random.uniform(0, np.pi / 2)
+        if center <= (L / 2) * np.sin(angle):
+            crossings += 1
+
+    if crossings > 0:
+        pi_est_buffon = (2 * L * N) / (t * crossings)
+    else:
+        pi_est_buffon = 0  # Avoid division by zero
+    pi_buffon_estimates.append(pi_est_buffon)
+    buffon_errors.append(abs(true_pi - pi_est_buffon))
+
+# ---------------------- Plotting ----------------------
+
+plt.figure(figsize=(12, 10))
+
+# --- π Estimation Plot ---
+plt.subplot(2, 1, 1)
+plt.plot(N_values, pi_buffon_estimates, label="Buffon's Needle", marker='o', color='blue')
+plt.plot(N_values, pi_circle_estimates, label="Circle Monte Carlo", marker='s', color='orange')
+plt.axhline(y=true_pi, color='black', linestyle='--', label='True π')
+plt.xscale('log')
+plt.ylabel('Estimated π')
+plt.title('π Estimation vs. Number of Throws')
+plt.legend()
+plt.grid(True)
+
+# --- Error Plot ---
+plt.subplot(2, 1, 2)
+plt.plot(N_values, buffon_errors, label="Buffon's Needle Error", marker='o', color='blue')
+plt.plot(N_values, circle_errors, label="Circle Monte Carlo Error", marker='s', color='orange')
+plt.xscale('log')
+plt.yscale('log')
+plt.xlabel('Number of Throws (log scale)')
+plt.ylabel('Absolute Error (log scale)')
+plt.title('Error Convergence of π Estimation Methods')
+plt.legend()
+plt.grid(True)
+
+plt.tight_layout()
+plt.show()
+```
+![alt text](image-12.png)
+
+[Collab](https://colab.research.google.com/drive/1TfsvxpoaiTdpnjP5AUYLvipYiL07wvq_?usp=sharing)
+
 ###  Visualization
 
 You can simulate and visualize needle positions using matplotlib to show how often they cross the lines.
