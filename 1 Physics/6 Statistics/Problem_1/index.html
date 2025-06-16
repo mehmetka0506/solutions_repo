@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>Statistics Problem 1 - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "Statistics Problem 1";
         var mkdocs_page_input_path = "1 Physics/6 Statistics/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -70,7 +70,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal">4 Electromagnetism</a>
 <ul>
-<li class="toctree-l2"><a class="reference internal" href="../../4%20Electromagnetism/Problem_1/">Electromagnetism Problem 1</a>
+<li class="toctree-l2"><a class="reference internal" href="../../4%20Electromagnetism/Problem_1/">Problem 1</a>
 </li>
 </ul>
 </li>
@@ -82,11 +82,33 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">6 Statistics</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Statistics Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#exploring-the-central-limit-theorem-clt">Exploring the Central Limit Theorem (CLT)</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#motivation">Motivation</a>
+</li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
+<li class="toctree-l3"><a class="reference internal" href="#objective">Objective</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#population-distributions">Population Distributions</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#python-code">Python Code</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#observations-and-insights">Observations and Insights</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions">Definitions</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#real-world-applications-of-clt">Real-World Applications of CLT</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#colab-link">Colab Link</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Statistics Problem 2</a>
 </li>
 </ul>
 </li>
@@ -163,7 +185,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">6 Statistics</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">Statistics Problem 1</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,12 +193,91 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<h1 id="statistics-problem-1">Statistics Problem 1</h1>
+<h2 id="exploring-the-central-limit-theorem-clt">Exploring the Central Limit Theorem (CLT)</h2>
+<hr/>
+<h3 id="motivation">Motivation</h3>
+<p>The <strong>Central Limit Theorem (CLT)</strong> states:</p>
+<blockquote>
+<p><em>Regardless of the population distribution, the distribution of the sample mean tends to a normal distribution as the sample size increases.</em></p>
+</blockquote>
+<p>This is foundational in statistics and useful in many real-world applications like:</p>
+<ul>
+<li>Estimating population parameters</li>
+<li>Quality control in manufacturing</li>
+<li>Risk modeling in finance</li>
+</ul>
+<hr/>
+<h2 id="objective">Objective</h2>
+<p>We will simulate sampling from various distributions and observe how the sampling distribution of the mean approaches normality as the sample size increases.</p>
+<hr/>
+<h2 id="population-distributions">Population Distributions</h2>
+<p>We will use the following:</p>
+<ul>
+<li><strong>Uniform Distribution</strong> (0, 1)</li>
+<li><strong>Exponential Distribution</strong> (λ = 1)</li>
+<li><strong>Binomial Distribution</strong> (n = 10, p = 0.5)</li>
+</ul>
+<hr/>
+<h2 id="python-code">Python Code</h2>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+def simulate_clt(distribution_func, name, **kwargs):
+    np.random.seed(42)
+    population = distribution_func(size=100000, **kwargs)
+
+    fig, axes = plt.subplots(1, 4, figsize=(20, 4))
+    sample_sizes = [5, 10, 30, 50]
+
+    for i, size in enumerate(sample_sizes):
+        sample_means = [np.mean(np.random.choice(population, size)) for _ in range(1000)]
+        sns.histplot(sample_means, kde=True, ax=axes[i], stat="density", bins=30, color='skyblue')
+        axes[i].set_title(f"{name}\nSample size = {size}")
+        axes[i].set_xlabel("Sample Mean")
+        axes[i].set_ylabel("Density")
+
+    plt.suptitle(f"Sampling Distribution of the Mean for {name}", fontsize=16)
+    plt.tight_layout()
+    plt.show()
+
+simulate_clt(np.random.uniform, "Uniform (0,1)", low=0, high=1)
+simulate_clt(np.random.exponential, "Exponential (λ=1)", scale=1)
+simulate_clt(np.random.binomial, "Binomial (n=10, p=0.5)", n=10, p=0.5)
+</code></pre>
+<p><img alt="alt text" src="../image-1.png"/>
+<img alt="alt text" src="../image-2.png"/>
+<img alt="alt text" src="../image-3.png"/></p>
+<h2 id="observations-and-insights">Observations and Insights</h2>
+<p>As sample size increases, histograms become more bell-shaped.</p>
+<p>Even for skewed distributions (like exponential), the sample mean becomes nearly normal.</p>
+<p>CLT works surprisingly well even for n = 30.</p>
+<p>Larger sample size → smaller variance of sample mean.</p>
+<h2 id="definitions">Definitions</h2>
+<ul>
+<li><strong>Sample Mean (<span class="arithmatex">\(\bar{x}\)</span>)</strong>: The average of a sample.</li>
+<li><strong>Sampling Distribution</strong>: The distribution of a statistic (e.g., mean) over repeated samples.</li>
+<li><strong>Variance of Sample Mean</strong>: <span class="arithmatex">\(\frac{\sigma^2}{n}\)</span>, where <span class="arithmatex">\(\sigma^2\)</span> is the population variance.</li>
+<li><strong>Population Distribution</strong>: The underlying distribution from which samples are drawn.</li>
+<li><strong>Skewness</strong>: Asymmetry in the distribution.</li>
+</ul>
+<h2 id="real-world-applications-of-clt">Real-World Applications of CLT</h2>
+<p>Estimating average weights, heights, or scores from samples.</p>
+<p>Quality control processes that rely on sample batch tests.</p>
+<p>Predicting average customer behavior in marketing.</p>
+<p>Financial forecasts based on sampled historical data.</p>
+<p>Designing experiments and interpreting A/B tests.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The Central Limit Theorem is powerful: regardless of how skewed or irregular the original population is, the distribution of the sample mean tends to normal as sample size increases.</p>
+<p>This gives us confidence in using normal-based inference (confidence intervals, hypothesis tests) even when the original data is not normal — as long as the sample size is large enough</p>
+<h2 id="colab-link">Colab Link</h2>
+<p><a href="https://colab.research.google.com/drive/1seiRg-G9yzEN3KzS3bRN1mWxLOTlncoY?usp=sharing">Statistics</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
 <a class="btn btn-neutral float-left" href="../../5%20Circuits/Problem_1/" title="Problem 1"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-<a class="btn btn-neutral float-right" href="../Problem_2/" title="Problem 2">Next <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-right" href="../Problem_2/" title="Statistics Problem 2">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">

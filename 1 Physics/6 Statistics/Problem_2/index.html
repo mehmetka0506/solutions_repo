@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 2 - Physics and Mathematics</title>
+<title>Statistics Problem 2 - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 2";
+        var mkdocs_page_name = "Statistics Problem 2";
         var mkdocs_page_input_path = "1 Physics/6 Statistics/Problem_2.md";
         var mkdocs_page_url = null;
       </script>
@@ -70,7 +70,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal">4 Electromagnetism</a>
 <ul>
-<li class="toctree-l2"><a class="reference internal" href="../../4%20Electromagnetism/Problem_1/">Electromagnetism Problem 1</a>
+<li class="toctree-l2"><a class="reference internal" href="../../4%20Electromagnetism/Problem_1/">Problem 1</a>
 </li>
 </ul>
 </li>
@@ -82,10 +82,46 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">6 Statistics</a>
 <ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../Problem_1/">Problem 1</a>
+<li class="toctree-l2"><a class="reference internal" href="../Problem_1/">Statistics Problem 1</a>
 </li>
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Statistics Problem 2</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#estimating-using-monte-carlo-methods">Estimating π Using Monte Carlo Methods</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#motivation">Motivation</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#part-1-estimating-using-a-circle">Part 1: Estimating π Using a Circle</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#theoretical-foundation">Theoretical Foundation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#simulation-code-circle">Simulation Code (Circle)</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#visualization">Visualization</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#part-2-estimating-using-buffons-needle">Part 2: Estimating π Using Buffon’s Needle</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#theoretical-foundation_1">Theoretical Foundation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#simulation-code-buffons-needle">Simulation Code (Buffon’s Needle)</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#visualization_1">Visualization</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#observations-and-analysis">Observations and Analysis</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions">Definitions</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#real-world-applications">Real-World Applications</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#colab-link">Colab Link</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +199,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">6 Statistics</li>
-<li class="breadcrumb-item active">Problem 2</li>
+<li class="breadcrumb-item active">Statistics Problem 2</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,11 +207,173 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-2">Problem 2</h1>
+<h1 id="statistics-problem-2">Statistics Problem 2</h1>
+<h2 id="estimating-using-monte-carlo-methods">Estimating π Using Monte Carlo Methods</h2>
+<hr/>
+<h3 id="motivation">Motivation</h3>
+<p>Monte Carlo simulations are a powerful class of computational techniques that use randomness to solve problems or estimate values. One elegant use case is estimating the value of π through geometric probability. By simulating random events like point placements or needle drops, we can explore how π emerges from probability.</p>
+<p>This simulation-based approach connects key concepts in probability, geometry, and computation.</p>
+<hr/>
+<h2 id="part-1-estimating-using-a-circle">Part 1: Estimating π Using a Circle</h2>
+<h3 id="theoretical-foundation">Theoretical Foundation</h3>
+<p>If we inscribe a unit circle in a 2x2 square and throw random points in the square, the ratio of points that fall inside the circle to the total number of points approximates the area ratio:</p>
+<div class="arithmatex">\[
+\pi \approx 4 \cdot \frac{\text{Points Inside Circle}}{\text{Total Points}}
+\]</div>
+<h3 id="simulation-code-circle">Simulation Code (Circle)</h3>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(42)
+N = 10000
+x = np.random.uniform(-1, 1, N)
+y = np.random.uniform(-1, 1, N)
+dist = np.sqrt(x**2 + y**2)
+inside = dist &lt;= 1
+
+pi_estimate = 4 * np.sum(inside) / N
+print(f"Estimated π: {pi_estimate:.5f}")
+
+plt.figure(figsize=(6,6))
+plt.scatter(x[inside], y[inside], color='blue', s=1, label='Inside Circle')
+plt.scatter(x[~inside], y[~inside], color='red', s=1, label='Outside Circle')
+plt.title(f'Monte Carlo Estimation of π\nEstimate: {pi_estimate:.5f}')
+plt.legend()
+plt.gca().set_aspect('equal')
+plt.grid(True)
+plt.show()
+</code></pre>
+<p><img alt="alt text" src="../image-6.png"/></p>
+<h3 id="visualization">Visualization</h3>
+<ul>
+<li>Blue dots = inside unit circle</li>
+<li>Red dots = outside circle</li>
+<li>As N increases, convergence to π improves</li>
+</ul>
+<hr/>
+<h2 id="part-2-estimating-using-buffons-needle">Part 2: Estimating π Using Buffon’s Needle</h2>
+<h3 id="theoretical-foundation_1">Theoretical Foundation</h3>
+<p>Buffon's Needle experiment estimates π based on geometric probability:</p>
+<div class="arithmatex">\[
+\pi \approx \frac{2 \cdot L \cdot N}{t \cdot C}
+\]</div>
+<p>Where:</p>
+<ul>
+<li>L: length of the needle</li>
+<li>t: distance between parallel lines</li>
+<li>N: number of throws</li>
+<li>C: number of crossings</li>
+</ul>
+<h3 id="simulation-code-buffons-needle">Simulation Code (Buffon’s Needle)</h3>
+<pre><code class="language-python">import numpy as np
+
+np.random.seed(1)
+L = 1.0  # needle length
+t = 2.0  # distance between lines
+N = 100000
+crossings = 0
+
+for _ in range(N):
+    center = np.random.uniform(0, t/2)
+    angle = np.random.uniform(0, np.pi/2)
+    if center &lt;= (L/2)*np.sin(angle):
+        crossings += 1
+
+if crossings &gt; 0:
+    pi_buffon = (2 * L * N) / (t * crossings)
+    print(f"Estimated π via Buffon’s Needle: {pi_buffon:.5f}")
+else:
+    print("No crossings detected")
+Estimated π via Buffon’s Needle: 3.13087
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Re-run the simulation to store individual needle data for visualization
+L = 1.0  # needle length
+t = 2.0  # distance between lines
+N_viz = 1000 # Reduce N for visualization to avoid overcrowding the plot
+crossings_viz = 0
+needle_data = [] # Store (center, angle, crossed) for each needle
+
+np.random.seed(1) # Use the same seed for reproducibility
+
+for _ in range(N_viz):
+    center = np.random.uniform(0, t/2)
+    angle = np.random.uniform(0, np.pi/2)
+    crossed = center &lt;= (L/2)*np.sin(angle)
+    if crossed:
+        crossings_viz += 1
+    needle_data.append((center, angle, crossed))
+
+# Create the plot
+plt.figure(figsize=(8, 6))
+
+# Draw the lines
+plt.axhline(y=0, color='black', linestyle='-')
+plt.axhline(y=t/2, color='black', linestyle='-')
+
+
+# Plot the needles
+for center, angle, crossed in needle_data:
+    x_start = -L/2 * np.cos(angle)
+    y_start = center - L/2 * np.sin(angle)
+    x_end = L/2 * np.cos(angle)
+    y_end = center + L/2 * np.sin(angle)
+
+    color = 'red' if crossed else 'blue'
+    plt.plot([x_start, x_end], [y_start, y_end], color=color, linewidth=0.5)
+
+plt.xlabel("Needle X Position")
+plt.ylabel("Needle Y Position (Distance from bottom line)")
+plt.title(f"Buffon's Needle Simulation ({N_viz} needles)")
+plt.ylim(-L/2, t/2 + L/2) # Adjust y-limits to show the whole needle
+plt.xlim(-L/2, L/2) # Adjust x-limits
+plt.gca().set_aspect('equal', adjustable='box') # Set aspect ratio to equal
+plt.show()
+
+if crossings_viz &gt; 0:
+    pi_buffon_viz = (2 * L * N_viz) / (t * crossings_viz)
+    print(f"Estimated π via Buffon’s Needle (Visualization subset): {pi_buffon_viz:.5f}")
+else:
+     print("No crossings detected in visualization subset")
+
+</code></pre>
+<p><img alt="alt text" src="../image-7.png"/>
+<a href="https://colab.research.google.com/drive/1rfh9ZDpudMXHFwhg35HDeX2MsgLWHjk2?usp=sharing">Colab</a></p>
+<h3 id="visualization_1">Visualization</h3>
+<p>You can simulate and visualize needle positions using matplotlib to show how often they cross the lines.</p>
+<hr/>
+<h2 id="observations-and-analysis">Observations and Analysis</h2>
+<ul>
+<li><strong>Convergence</strong>: The circle method converges more quickly than Buffon’s Needle.</li>
+<li><strong>Accuracy</strong>: Buffon’s Needle can be noisy for small sample sizes.</li>
+<li><strong>Comparison</strong>: Both rely on large N, but geometric randomness in Buffon’s is less efficient.</li>
+</ul>
+<hr/>
+<h2 id="definitions">Definitions</h2>
+<ul>
+<li><strong>Monte Carlo Simulation</strong>: A method relying on random sampling to compute numerical estimates.</li>
+<li><strong>Geometric Probability</strong>: Estimation based on spatial geometry and randomness.</li>
+<li><strong>Convergence</strong>: How fast the simulation estimate approaches the true value.</li>
+</ul>
+<hr/>
+<h2 id="real-world-applications">Real-World Applications</h2>
+<ul>
+<li>Estimating physical constants</li>
+<li>Simulations in finance and risk analysis</li>
+<li>Geometry-based probability models</li>
+<li>Performance benchmarking in numerical algorithms</li>
+</ul>
+<hr/>
+<h2 id="conclusion">Conclusion</h2>
+<p>Monte Carlo methods are intuitive and powerful for demonstrating how randomness can solve real mathematical problems. Estimating π highlights the role of probability in computation.</p>
+<hr/>
+<h2 id="colab-link">Colab Link</h2>
+<p><a href="https://colab.research.google.com/drive/1IefYh36fLi-Vz7xeE2zcz5RYpTJ3CKfs?usp=sharing">Colab Notebook - Monte Carlo Estimation of π</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
-<a class="btn btn-neutral float-left" href="../Problem_1/" title="Problem 1"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-left" href="../Problem_1/" title="Statistics Problem 1"><span class="icon icon-circle-arrow-left"></span> Previous</a>
 <a class="btn btn-neutral float-right" href="../../7%20Measurements/Problem_1/" title="Problem 1">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>

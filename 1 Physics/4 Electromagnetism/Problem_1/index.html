@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Electromagnetism Problem 1 - Physics and Mathematics</title>
+<title>Problem 1 - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Electromagnetism Problem 1";
+        var mkdocs_page_name = "Problem 1";
         var mkdocs_page_input_path = "1 Physics/4 Electromagnetism/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -70,30 +70,8 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">4 Electromagnetism</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Electromagnetism Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#lorentz-force-simulating-the-motion-of-charged-particles">Lorentz Force: Simulating the Motion of Charged Particles</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#motivation">Motivation</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#constants-and-setup">Constants and Setup</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#equations-of-motion">Equations of Motion</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#python-simulation-code">Python Simulation Code</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#_1"></a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#visualized-results">Visualized Results</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#real-world-applications">Real-World Applications</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#extension-ideas">Extension Ideas</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#colab-link">Colab Link</a>
-</li>
 </ul>
 </li>
 </ul>
@@ -106,9 +84,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal">6 Statistics</a>
 <ul>
-<li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_1/">Problem 1</a>
+<li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_1/">Statistics Problem 1</a>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_2/">Problem 2</a>
+<li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_2/">Statistics Problem 2</a>
 </li>
 </ul>
 </li>
@@ -185,7 +163,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">4 Electromagnetism</li>
-<li class="breadcrumb-item active">Electromagnetism Problem 1</li>
+<li class="breadcrumb-item active">Problem 1</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -193,31 +171,42 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="electromagnetism-problem-1">Electromagnetism Problem 1</h1>
+<h2 id="electromagnetism-problem-1">Electromagnetism Problem 1</h2>
 <h2 id="lorentz-force-simulating-the-motion-of-charged-particles">Lorentz Force: Simulating the Motion of Charged Particles</h2>
 <hr/>
-<h3 id="motivation">Motivation</h3>
-<p>The Lorentz force, given by:</p>
+<h2 id="motivation">Motivation</h2>
+<p>The <strong>Lorentz force</strong>, given by the equation:</p>
 <div class="arithmatex">\[
 \vec{F} = q\vec{E} + q\vec{v} \times \vec{B}
 \]</div>
-<p>governs the motion of charged particles in electric and magnetic fields. It plays a crucial role in fields like plasma physics, astrophysics, mass spectrometry, and particle accelerators. In this problem, we focus on visualizing circular, spiral, and drift trajectories.</p>
-<hr/>
-<h2 id="constants-and-setup">Constants and Setup</h2>
-<p>We use the following constants for all scenarios:</p>
+<p>governs the motion of charged particles in electric and magnetic fields. This law is essential in understanding how charged particles behave in contexts such as:</p>
 <ul>
-<li>Charge: <span class="arithmatex">\(q = 1\)</span> C</li>
-<li>Mass: <span class="arithmatex">\(m = 1\)</span> g = 0.001 kg</li>
-<li>Magnetic Field: <span class="arithmatex">\(\vec{B} = [0, 0, 1]\)</span> T</li>
-<li>Electric Field (if used): <span class="arithmatex">\(\vec{E} = [0, 5, 0]\)</span> V/m</li>
+<li>Plasma physics  </li>
+<li>Particle accelerators  </li>
+<li>Magnetic traps  </li>
+<li>Mass spectrometers  </li>
+</ul>
+<p>In this simulation, we <strong>use a body with</strong> <code>q = 1 C</code> and <code>m = 1 gram = 0.001 kg</code> ( not an electron!) as instructed, and analyze its behavior in:</p>
+<ul>
+<li>Circular motion (magnetic field only)  </li>
+<li>Spiral motion (with velocity in the Z-direction)  </li>
+<li>Drift motion (crossed electric and magnetic fields)</li>
 </ul>
 <hr/>
-<h2 id="equations-of-motion">Equations of Motion</h2>
-<p>Using Newton's Second Law and the Lorentz force:</p>
+<h2 id="constants-and-setup">Constants and Setup</h2>
+<ul>
+<li>Charge: <code>q = 1</code> C  </li>
+<li>Mass: <code>m = 0.001</code> kg  </li>
+<li>Magnetic Field: <strong>B = [0, 0, 1]</strong> T  </li>
+<li>Electric Field: <strong>E = [0, 5, 0]</strong> V/m (only for drift scenario)</li>
+</ul>
+<hr/>
+<h3 id="equations-of-motion">Equations of Motion</h3>
+<p>Using Newton’s Second Law:</p>
 <div class="arithmatex">\[
 \frac{d\vec{v}}{dt} = \frac{q}{m}(\vec{E} + \vec{v} \times \vec{B})
 \]</div>
-<p>We numerically integrate this using <code>solve_ivp</code>.</p>
+<p>Numerical integration will be done using <code>solve_ivp</code> from SciPy.</p>
 <hr/>
 <h2 id="python-simulation-code">Python Simulation Code</h2>
 <pre><code class="language-python">import numpy as np 
