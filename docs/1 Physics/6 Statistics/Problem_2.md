@@ -28,26 +28,40 @@ $$
 import numpy as np
 import matplotlib.pyplot as plt
 
+# Set random seed and number of points
 np.random.seed(42)
 N = 10000
+
+# Generate random points
 x = np.random.uniform(-1, 1, N)
 y = np.random.uniform(-1, 1, N)
+
+# Calculate distance from origin and determine points inside unit circle
 dist = np.sqrt(x**2 + y**2)
 inside = dist <= 1
 
+# Estimate Pi using Monte Carlo method
 pi_estimate = 4 * np.sum(inside) / N
 print(f"Estimated π: {pi_estimate:.5f}")
 
-plt.figure(figsize=(6,6))
+# Plot points
+plt.figure(figsize=(6, 6))
 plt.scatter(x[inside], y[inside], color='blue', s=1, label='Inside Circle')
 plt.scatter(x[~inside], y[~inside], color='red', s=1, label='Outside Circle')
-plt.title(f'Monte Carlo Estimation of π\nEstimate: {pi_estimate:.5f}')
+
+# Title and labels
+plt.title(f'Monte Carlo Estimation of π\nEstimate: {pi_estimate:.5f} with N = {N}')
+plt.text(-1, 1.05, f'N = {N}', fontsize=10, color='black')  # Additional label on plot
+
+# Formatting
 plt.legend()
 plt.gca().set_aspect('equal')
 plt.grid(True)
+plt.xlim([-1.1, 1.1])
+plt.ylim([-1.1, 1.1])
 plt.show()
 ```
-![alt text](image-6.png)
+![alt text](image-8.png)
 ###  Visualization
 
 - Blue dots = inside unit circle
@@ -190,5 +204,5 @@ Monte Carlo methods are intuitive and powerful for demonstrating how randomness 
 
 ##  Colab Link
 
-[Colab Notebook - Monte Carlo Estimation of π](https://colab.research.google.com/drive/1IefYh36fLi-Vz7xeE2zcz5RYpTJ3CKfs?usp=sharing)
+[Colab Notebook - Monte Carlo Estimation of π](https://colab.research.google.com/drive/1znAW-lZiKk_-vyZjIXH0tht3CXjHO0yg?usp=sharing)
 

@@ -40,32 +40,71 @@ We will use the following:
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from scipy.stats import norm
+
+# Set seaborn style for better visuals
+sns.set(style="whitegrid")
 
 def simulate_clt(distribution_func, name, **kwargs):
-    np.random.seed(42)
-    population = distribution_func(size=100000, **kwargs)
+    """
+    Simulate the Central Limit Theorem for a given distribution function.
 
+    Parameters:
+        distribution_func (function): NumPy random distribution function
+        name (str): Name of the distribution for plot titles
+        kwargs (dict): Parameters for the distribution function
+    """
+    np.random.seed(42)
+
+    # Generate a large population from the specified distribution
+    population = distribution_func(size=100_000, **kwargs)
+
+    # Setup the plot layout
     fig, axes = plt.subplots(1, 4, figsize=(20, 4))
     sample_sizes = [5, 10, 30, 50]
 
     for i, size in enumerate(sample_sizes):
-        sample_means = [np.mean(np.random.choice(population, size)) for _ in range(1000)]
-        sns.histplot(sample_means, kde=True, ax=axes[i], stat="density", bins=30, color='skyblue')
+        # Generate 1000 sample means
+        sample_means = [
+            np.mean(np.random.choice(population, size=size, replace=True))
+            for _ in range(1000)
+        ]
+
+        # Plot histogram and KDE
+        sns.histplot(
+            sample_means,
+            bins=30,
+            kde=True,
+            stat="density",
+            ax=axes[i],
+            color="skyblue",
+            edgecolor="black"
+        )
+
+        # Overlay theoretical normal distribution for comparison
+        mean = np.mean(sample_means)
+        std = np.std(sample_means)
+        x = np.linspace(min(sample_means), max(sample_means), 100)
+        axes[i].plot(x, norm.pdf(x, loc=mean, scale=std), color='red', linestyle='--', label='Normal PDF')
+
         axes[i].set_title(f"{name}\nSample size = {size}")
         axes[i].set_xlabel("Sample Mean")
         axes[i].set_ylabel("Density")
+        axes[i].legend()
 
     plt.suptitle(f"Sampling Distribution of the Mean for {name}", fontsize=16)
-    plt.tight_layout()
+    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
     plt.show()
 
+# Run simulations for three different distributions
 simulate_clt(np.random.uniform, "Uniform (0,1)", low=0, high=1)
 simulate_clt(np.random.exponential, "Exponential (λ=1)", scale=1)
 simulate_clt(np.random.binomial, "Binomial (n=10, p=0.5)", n=10, p=0.5)
+
 ```
-![alt text](image-1.png)
-![alt text](image-2.png)
-![alt text](image-3.png)
+![alt text](image-9.png)
+![alt text](image-10.png)
+![alt text](image-11.png)
 
 ## Observations and Insights
 As sample size increases, histograms become more bell-shaped.
